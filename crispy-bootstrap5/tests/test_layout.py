@@ -484,6 +484,7 @@ def test_keepcontext_context_manager(settings):
     assert response.content.count(b"form-check-inline") == 3
     assert response.content.count(b"form-check-input") > 0
 
+
 def test_bootstrap5_form_inline():
     form = SampleForm()
     form.helper = FormHelper()

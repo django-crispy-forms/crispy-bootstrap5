@@ -9,7 +9,7 @@ INSTALLED_APPS = (
     "django.contrib.admin",
     "crispy_forms",
     "crispy_bootstrap5",
-    "tests"
+    "tests",
 )
 
 DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"}}

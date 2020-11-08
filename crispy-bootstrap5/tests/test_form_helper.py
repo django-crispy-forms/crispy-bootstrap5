@@ -60,7 +60,6 @@ def test_inputs(settings):
     assert len(re.findall(r"<input[^>]+> <", html)) == 9
 
 
-
 def test_invalid_form_method():
     form_helper = FormHelper()
     with pytest.raises(FormHelpersException):
@@ -595,7 +594,7 @@ def test_label_class_and_field_class_bs5():
     assert '<div class="mb-3">' in html
     assert '<div class="col-lg-8">' in html
     assert html.count("col-lg-8") == 7
-    # TODO FIX THIS TEST 
+    # TODO FIX THIS TEST
     # assert "offset" not in html
 
     form.helper.label_class = "col-sm-3 col-md-4"

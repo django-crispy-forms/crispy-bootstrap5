@@ -21,7 +21,14 @@ def advanced_layout():
     )
 
 
-@pytest.fixture(autouse=True, params=(["bootstrap5",]))
+@pytest.fixture(
+    autouse=True,
+    params=(
+        [
+            "bootstrap5",
+        ]
+    ),
+)
 def template_packs(request, settings):
     check_template_pack(request.node, request.param)
     settings.CRISPY_TEMPLATE_PACK = request.param
