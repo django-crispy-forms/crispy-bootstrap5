@@ -35,7 +35,13 @@
                 {% include 'bootstrap5/layout/field_file.html' %}
             {% else %}
                 <div class="{{ field_class }}">
-                    {% crispy_field field %}
+                    {% if field|is_file and not field.errors %}
+                        {% crispy_field field 'class' 'form-control-file' %}
+                    {% elif field.errors %}
+                        {% crispy_field field 'class' 'form-control is-invalid' %}
+                    {% else %}
+                        {% crispy_field field 'class' 'form-control' %}
+                    {% endif %}
                     {% include 'bootstrap5/layout/help_text_and_errors.html' %}
                 </div>
             {% endif %}
