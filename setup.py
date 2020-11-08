@@ -24,7 +24,7 @@ setup(
         "CI": "https://github.com/smithdc1/crispy-bootstrap5/actions",
         "Changelog": "https://github.com/smithdc1/crispy-bootstrap5/releases",
     },
-    license="Apache License, Version 2.0",
+    license="MIT",
     version=VERSION,
     packages=["crispy_bootstrap5"],
     install_requires=["django-crispy-forms>=1.9.2", "django>=2.2"],
