@@ -41,7 +41,7 @@ jobs:
           python-version: 3.9
       - name: Install dependencies
         run: |
-          pip install flake8, isort, black
+          pip install flake8 isort black
       - name: Run lint
         run: |
           black . --check
