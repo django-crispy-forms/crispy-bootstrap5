@@ -4,6 +4,10 @@
 
 Bootstrap5 template pack for django-crispy-forms
 
+### Warning
+
+This project is in early stages of development (not yet on PyPI), if you wish to explore please install directly from this repo.
+
 ## Installation
 
 Install this plugin using `pip`:
