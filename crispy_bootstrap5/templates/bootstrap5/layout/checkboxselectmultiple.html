@@ -15,11 +15,9 @@
     </div>
    {% endfor %}
     {% if field.errors and inline_class %}
-    <div class="w-100 {%if use_custom_control%}custom-control custom-checkbox{% if inline_class %} custom-control-inline{% endif %}{% else %}form-check{% if inline_class %} form-check-inline{% endif %}{% endif %}">
-        {# the following input is only meant to allow boostrap to render the error message as it has to be after an invalid input. As the input has no name, no data will be sent. #}
-        <input type="checkbox" class="custom-control-input {% if field.errors %}is-invalid{%endif%}">
-        {% include 'bootstrap5/layout/field_errors_block.html' %}
-
+        {% for error in field.errors %}
+            <p id="error_{{ forloop.counter }}_{{ field.auto_id }}" class="text-danger mb-0"><small><strong>{{ error }}</strong></small></p>
+        {% endfor %}
     {% endif %}
 
     {% include 'bootstrap5/layout/help_text.html' %}
