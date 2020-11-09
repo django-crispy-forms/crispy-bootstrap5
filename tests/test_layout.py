@@ -1,5 +1,8 @@
 import pytest
-
+from crispy_forms.bootstrap import Field, InlineCheckboxes
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import HTML, Column, Fieldset, Layout, Row
+from crispy_forms.utils import render_crispy_form
 from django import forms
 from django.forms.models import formset_factory, modelformset_factory
 from django.middleware.csrf import _get_new_csrf_string
@@ -7,21 +10,6 @@ from django.shortcuts import render
 from django.template import Context, Template
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-
-from crispy_forms.bootstrap import Field, InlineCheckboxes
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import (
-    HTML,
-    ButtonHolder,
-    Column,
-    Div,
-    Fieldset,
-    Layout,
-    MultiField,
-    Row,
-    Submit,
-)
-from crispy_forms.utils import render_crispy_form
 
 from .forms import (
     CheckboxesSampleForm,
@@ -326,19 +314,23 @@ def test_formset_layout(settings):
     # Check formset fields
     assert contains_partial(
         html,
-        '<input id="id_form-TOTAL_FORMS" name="form-TOTAL_FORMS" type="hidden" value="3"/>',
+        '<input id="id_form-TOTAL_FORMS" name="form-TOTAL_FORMS" type="hidden"'
+        ' value="3"/>',
     )
     assert contains_partial(
         html,
-        '<input id="id_form-INITIAL_FORMS" name="form-INITIAL_FORMS" type="hidden" value="0"/>',
+        '<input id="id_form-INITIAL_FORMS" name="form-INITIAL_FORMS" type="hidden"'
+        ' value="0"/>',
     )
     assert contains_partial(
         html,
-        '<input id="id_form-MAX_NUM_FORMS" name="form-MAX_NUM_FORMS" type="hidden" value="1000"/>',
+        '<input id="id_form-MAX_NUM_FORMS" name="form-MAX_NUM_FORMS" type="hidden"'
+        ' value="1000"/>',
     )
     assert contains_partial(
         html,
-        '<input id="id_form-MIN_NUM_FORMS" name="form-MIN_NUM_FORMS" type="hidden" value="0"/>',
+        '<input id="id_form-MIN_NUM_FORMS" name="form-MIN_NUM_FORMS" type="hidden"'
+        ' value="0"/>',
     )
     assert html.count("hidden") == 5
 
@@ -376,15 +368,18 @@ def test_modelformset_layout():
 
     assert contains_partial(
         html,
-        '<input id="id_form-TOTAL_FORMS" name="form-TOTAL_FORMS" type="hidden" value="3"/>',
+        '<input id="id_form-TOTAL_FORMS" name="form-TOTAL_FORMS" type="hidden"'
+        ' value="3"/>',
     )
     assert contains_partial(
         html,
-        '<input id="id_form-INITIAL_FORMS" name="form-INITIAL_FORMS" type="hidden" value="0"/>',
+        '<input id="id_form-INITIAL_FORMS" name="form-INITIAL_FORMS" type="hidden"'
+        ' value="0"/>',
     )
     assert contains_partial(
         html,
-        '<input id="id_form-MAX_NUM_FORMS" name="form-MAX_NUM_FORMS" type="hidden" value="1000"/>',
+        '<input id="id_form-MAX_NUM_FORMS" name="form-MAX_NUM_FORMS" type="hidden"'
+        ' value="1000"/>',
     )
 
     assert html.count('name="form-0-email"') == 1
@@ -523,26 +518,29 @@ def test_file_field():
     form = FileForm()
     form.helper = FormHelper()
     form.helper.layout = Layout("clearable_file")
-    html = render_crispy_form(form)
+    # html = render_crispy_form(form)
     # TODO FIX THIS TEST
     # assert '<span class="custom-control custom-checkbox">' in html
-    # assert '<input type="file" name="clearable_file" class="custom-file-input"  >' in html
+    # assert '<input type="file" name="clearable_file" class="custom-file-input"  >'
+    #  in html
 
     form.helper.use_custom_control = False
-    html = render_crispy_form(form)
-    # assert '<input type="checkbox" name="clearable_file-clear" id="clearable_file-clear_id">' in html
-    # assert '<input type="file" name="clearable_file" class="custom-file-input"  >' not in html
+    # html = render_crispy_form(form)
+    # assert '<input type="checkbox" name="clearable_file-clear"
+    # id="clearable_file-clear_id">' in html
+    # assert ('<input type="file" name="clearable_file" class="custom-file-input"  >'
+    #  not in html)
 
     form.helper.use_custom_control = True
     form.helper.layout = Layout("file_field")
-    html = render_crispy_form(form)
+    # html = render_crispy_form(form)
     # assert '<div class="form-control custom-file"' in html
     # assert '<input type="file" name="file_field" class="custom-file-input"' in html
     # assert '<label class="custom-file-label' in html
     # assert 'for="id_file_field">---</label>' in html
 
     form.helper.use_custom_control = False
-    html = render_crispy_form(form)
+    # html = render_crispy_form(form)
     # assert "custom-file" not in html
     # assert "custom-file-input" not in html
     # assert "custom-file-label" not in html

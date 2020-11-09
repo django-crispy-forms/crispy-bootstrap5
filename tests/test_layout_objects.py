@@ -1,9 +1,3 @@
-from django import forms
-from django.template import Context, Template
-from django.test.html import parse_html
-from django.utils.translation import activate, deactivate
-from django.utils.translation import gettext as _
-
 from crispy_forms.bootstrap import (
     Accordion,
     AccordionGroup,
@@ -22,6 +16,10 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Field, Layout, MultiWidgetField
 from crispy_forms.tests.utils import contains_partial
 from crispy_forms.utils import render_crispy_form
+from django import forms
+from django.template import Context, Template
+from django.utils.translation import activate, deactivate
+from django.utils.translation import gettext as _
 
 from .forms import CheckboxesSampleForm, SampleForm
 
@@ -186,7 +184,6 @@ class TestBootstrapLayoutObjects:
             PrependedText("password2", "$"),
         )
         html = render_crispy_form(test_form)
-        dom = parse_html(html)
 
         # Check form parameters
         assert html.count('<span class="input-group-text">@</span>') == 1
@@ -296,7 +293,8 @@ class TestBootstrapLayoutObjects:
         assert (
             html.count(
                 '<ul class="nav nav-tabs"> <li class="nav-item">'
-                '<a class="nav-link active" href="#custom-name" data-toggle="tab">One</a></li>'
+                '<a class="nav-link active" href="#custom-name" data-toggle="tab">'
+                "One</a></li>"
             )
             == 1
         )
