@@ -1,16 +1,6 @@
 import re
 
 import pytest
-
-import django
-from django import forms
-from django.forms.models import formset_factory
-from django.middleware.csrf import _get_new_csrf_string
-from django.template import Context, Template, TemplateSyntaxError
-from django.test.html import parse_html
-from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
-
 from crispy_forms.bootstrap import (
     AppendedText,
     FieldWithButtons,
@@ -19,17 +9,17 @@ from crispy_forms.bootstrap import (
     StrictButton,
 )
 from crispy_forms.helper import FormHelper, FormHelpersException
-from crispy_forms.layout import Button, Field, Hidden, Layout, MultiField, Reset, Submit
+from crispy_forms.layout import Button, Hidden, Layout, Reset, Submit
 from crispy_forms.templatetags.crispy_forms_tags import CrispyFormNode
 from crispy_forms.utils import render_crispy_form
+from django import forms
+from django.forms.models import formset_factory
+from django.middleware.csrf import _get_new_csrf_string
+from django.template import Context, Template
+from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
-from .forms import (
-    SampleForm,
-    SampleForm7,
-    SampleForm8,
-    SampleFormWithMedia,
-    SampleFormWithMultiValueField,
-)
+from .forms import SampleForm, SampleForm7, SampleForm8, SampleFormWithMedia
 
 
 def test_inputs(settings):
@@ -148,7 +138,8 @@ def test_html5_required():
     form.helper = FormHelper()
     form.helper.html5_required = True
     html = render_crispy_form(form)
-    # 6 out of 7 fields are required and an extra one for the SplitDateTimeWidget makes 7.
+    # 6 out of 7 fields are required and an extra one for the
+    # SplitDateTimeWidget makes 7.
     assert len(re.findall(r"\brequired\b", html)) == 7
 
     form = SampleForm()
@@ -312,7 +303,8 @@ def test_CSRF_token_POST_form():
 
     # The middleware only initializes the CSRF token when processing a real request
     # So using RequestContext or csrf(request) here does not work.
-    # Instead I set the key `csrf_token` to a CSRF token manually, which `csrf_token` tag uses
+    # Instead I set the key `csrf_token` to a CSRF token manually, which `csrf_token`
+    # tag uses
     c = Context(
         {
             "form": SampleForm(),
@@ -629,8 +621,8 @@ def test_label_class_and_field_class_bs5_offset_when_horizontal():
 
     assert '<div class="mb-3 row">' in html
     assert (
-        '<div class="col-sm-offset-3 col-md-offset-4 col-lg-offset-4 col-sm-8 col-md-6 col-7 col-lg-8">'
-        in html
+        '<div class="col-sm-offset-3 col-md-offset-4 col-lg-offset-4 col-sm-8'
+        ' col-md-6 col-7 col-lg-8">' in html
     )
     assert html.count("col-sm-8") == 7
     assert html.count("col-md-6") == 7

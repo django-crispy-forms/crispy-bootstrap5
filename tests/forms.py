@@ -1,7 +1,6 @@
+from crispy_forms.helper import FormHelper
 from django import forms
 from django.db import models
-
-from crispy_forms.helper import FormHelper
 
 
 class SampleForm(forms.Form):
@@ -104,8 +103,9 @@ class SampleForm4(forms.ModelForm):
         """
         before Django1.6, one cannot use __all__ shortcut for fields
         without getting the following error:
-        django.core.exceptions.FieldError: Unknown field(s) (a, l, _) specified for CrispyTestModel
-        because obviously it casts the string to a set
+        django.core.exceptions.FieldError: Unknown field(s) (a, l, _)
+        specified for CrispyTestModel because obviously it casts the
+        string to a set
         """
 
         model = CrispyTestModel

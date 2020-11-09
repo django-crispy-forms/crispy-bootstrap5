@@ -1,12 +1,10 @@
 import pytest
-
-from django import forms
-
 from crispy_forms.bootstrap import AppendedText
 from crispy_forms.exceptions import DynamicError
 from crispy_forms.helper import FormHelper, FormHelpersException
-from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, MultiField
+from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout
 from crispy_forms.tests.forms import SampleForm
+from django import forms
 
 
 def test_wrap_all_fields():

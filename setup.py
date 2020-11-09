@@ -1,5 +1,6 @@
-from setuptools import setup
 import os
+
+from setuptools import setup
 
 VERSION = "0.1"
 
@@ -22,7 +23,9 @@ setup(
     project_urls={
         "Issues": "https://github.com/django-crispy-forms/crispy-bootstrap5/issues",
         "CI": "https://github.com/django-crispy-forms/crispy-bootstrap5/actions",
-        "Changelog": "https://github.com/django-crispy-forms/crispy-bootstrap5/releases",
+        "Changelog": (
+            "https://github.com/django-crispy-forms/crispy-bootstrap5/releases"
+        ),
     },
     license="MIT",
     version=VERSION,

@@ -1,12 +1,10 @@
-import pytest
-
 import django
+import pytest
+from crispy_forms.exceptions import CrispyError
+from crispy_forms.templatetags.crispy_forms_field import crispy_addon
 from django.forms.boundfield import BoundField
 from django.forms.formsets import formset_factory
 from django.template import Context, Template
-
-from crispy_forms.exceptions import CrispyError
-from crispy_forms.templatetags.crispy_forms_field import crispy_addon
 
 from .forms import SampleForm
 
