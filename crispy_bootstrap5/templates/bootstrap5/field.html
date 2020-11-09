@@ -26,7 +26,11 @@
 
         {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}
             {% if field|is_checkbox and form_show_labels %}
-                    {% crispy_field field 'class' 'form-check-input' %}
+                    {% if field.errors %}
+                        {% crispy_field field 'class' 'form-check-input is-invalid' %}
+                    {% else %}
+                        {% crispy_field field 'class' 'form-check-input' %}
+                    {% endif %}
                 <label for="{{ field.id_for_label }}" class="form-check-label{% if field.field.required %} requiredField{% endif %}">
                     {{ field.label|safe }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
                 </label>
