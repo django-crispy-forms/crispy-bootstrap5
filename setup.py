@@ -34,4 +34,5 @@ setup(
     extras_require={"test": ["pytest", "pytest-django"]},
     tests_require=["crispy-bootstrap5[test]"],
     python_requires=">=3.6",
+    include_package_data=True,
 )
