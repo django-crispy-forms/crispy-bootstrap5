@@ -35,12 +35,11 @@
                     {{ field.label|safe }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
                 </label>
                 {% include 'bootstrap5/layout/help_text_and_errors.html' %}
-            {% elif field|is_file and not field|is_clearable_file and use_custom_control  %}
-                {% include 'bootstrap5/layout/field_file.html' %}
             {% else %}
                 <div class="{{ field_class }}">
-                    {% if field|is_file and not field.errors %}
-                        {% crispy_field field 'class' 'form-control-file' %}
+                    {% if field|is_file and field|is_clearable_file %}
+                    {# clearable files are more complex, potentially need a checkbox -- let Django render these for now #}
+                        {% crispy_field field %}
                     {% elif field.errors %}
                         {% crispy_field field 'class' 'form-control is-invalid' %}
                     {% else %}
