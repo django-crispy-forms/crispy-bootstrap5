@@ -12,7 +12,21 @@ Install this plugin using `pip`:
 
 ## Usage
 
-Usage instructions go here.
+You will need to update your project's settings file to add ``crispy_forms``
+and ``crispy_bootstrap5`` to your projects ``INSTALLED_APPS``. Also set
+``bootstrap5`` as and allowed template pack and as the default template pack
+for your project::
+
+    INSTALLED_APPS = (
+        ...
+        "crispy_forms",
+        "crispy_bootstrap5",
+        ...
+    )
+
+    CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+    CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 ## Development
 
