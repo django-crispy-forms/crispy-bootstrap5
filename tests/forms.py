@@ -210,3 +210,13 @@ class FileForm(forms.Form):
     clearable_file = forms.FileField(
         widget=forms.ClearableFileInput, required=False, initial=FakeFieldFile()
     )
+
+
+class InputsFrom(forms.Form):
+    text_input = forms.CharField()
+    text_area = forms.CharField(widget=forms.Textarea())
+    checkboxes = forms.MultipleChoiceField(
+        choices=((1, "Option one"), (2, "Option two"), (3, "Option three")),
+        initial=(1,),
+        widget=forms.CheckboxSelectMultiple,
+    )

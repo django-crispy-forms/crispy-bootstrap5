@@ -1,3 +1,4 @@
+import pytest
 from crispy_forms.bootstrap import (
     Accordion,
     AccordionGroup,
@@ -21,7 +22,8 @@ from django.template import Context, Template
 from django.utils.translation import activate, deactivate
 from django.utils.translation import gettext as _
 
-from .forms import CheckboxesSampleForm, SampleForm
+from .forms import CheckboxesSampleForm, InputsFrom, SampleForm
+from .utils import parse_expected, parse_form
 
 
 def test_field_with_custom_template():
@@ -149,6 +151,21 @@ def test_remove_labels():
     html = render_crispy_form(form)
 
     assert "<label" not in html
+
+
+@pytest.mark.parametrize(
+    "input,expected",
+    [
+        ("text_input", "text_input.html"),
+        ("text_area", "text_area.html"),
+        ("checkboxes", "checkboxes.html"),
+    ],
+)
+def test_inputs(input, expected):
+    form = InputsFrom()
+    form.helper = FormHelper()
+    form.helper.layout = Layout(input)
+    assert parse_form(form) == parse_expected(expected)
 
 
 class TestBootstrapLayoutObjects:
