@@ -213,10 +213,12 @@ class FileForm(forms.Form):
 
 
 class InputsFrom(forms.Form):
+    choices = ((1, "Option one"), (2, "Option two"), (3, "Option three"))
     text_input = forms.CharField()
     text_area = forms.CharField(widget=forms.Textarea())
     checkboxes = forms.MultipleChoiceField(
-        choices=((1, "Option one"), (2, "Option two"), (3, "Option three")),
+        choices=choices,
         initial=(1,),
         widget=forms.CheckboxSelectMultiple,
     )
+    radio = forms.ChoiceField(widget=forms.RadioSelect, choices=choices)
