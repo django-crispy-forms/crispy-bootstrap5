@@ -222,3 +222,6 @@ class InputsFrom(forms.Form):
         widget=forms.CheckboxSelectMultiple,
     )
     radio = forms.ChoiceField(widget=forms.RadioSelect, choices=choices)
+    single_checkbox = forms.CharField(
+        label="company", required=False, widget=forms.CheckboxInput()
+    )

@@ -159,7 +159,8 @@ def test_remove_labels():
         ("text_input", "text_input.html"),
         ("text_area", "text_area.html"),
         ("checkboxes", "checkboxes.html"),
-        ("radio", "radio.html")
+        ("radio", "radio.html"),
+        ("single_checkbox", "single_checkbox.html"),
     ],
 )
 def test_inputs(input, expected):
