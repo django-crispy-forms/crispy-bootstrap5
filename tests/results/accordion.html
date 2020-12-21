@@ -1,0 +1,53 @@
+<div class="accordion" id="accordion">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#one"
+        aria-expanded="true" aria-controls="one">
+        one
+      </button>
+    </h2>
+    <div id="one" class="accordion-collapse collapse show" aria-labelledby="one" data-bs-parent="#accordion">
+      <div class="accordion-body">
+        <div id="div_id_first_name" class="mb-3">
+          <label for="id_first_name" class="form-label requiredField">
+            first name<span class="asteriskField">*</span>
+          </label>
+          <div>
+            <input type="text" name="first_name" maxlength="5" class="textinput textInput inputtext form-control"
+              required id="id_first_name" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#two"
+        aria-expanded="true" aria-controls="two">
+        two
+      </button>
+    </h2>
+    <div id="two" class="accordion-collapse collapse" aria-labelledby="two" data-bs-parent="#accordion">
+      <div class="accordion-body">
+        <div id="div_id_password1" class="mb-3">
+          <label for="id_password1" class="form-label requiredField">
+            password<span class="asteriskField">*</span>
+          </label>
+          <div>
+            <input type="password" name="password1" maxlength="30" class="textinput textInput form-control" required
+              id="id_password1" />
+          </div>
+        </div>
+        <div id="div_id_password2" class="mb-3">
+          <label for="id_password2" class="form-label requiredField">
+            re-enter password<span class="asteriskField">*</span>
+          </label>
+          <div>
+            <input type="password" name="password2" maxlength="30" class="textinput textInput form-control" required
+              id="id_password2" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
