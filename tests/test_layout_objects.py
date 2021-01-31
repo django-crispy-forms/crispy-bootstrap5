@@ -6,6 +6,7 @@ from crispy_forms.bootstrap import (
     AppendedText,
     FieldWithButtons,
     InlineCheckboxes,
+    InlineField,
     InlineRadios,
     PrependedAppendedText,
     PrependedText,
@@ -450,3 +451,13 @@ class TestBootstrapLayoutObjects:
         for id_suffix in expected_ids:
             expected_str = 'id="id_{id_suffix}"'.format(id_suffix=id_suffix)
             assert html.count(expected_str) == 1
+
+    def test_inline_field(self):
+        form = SampleForm()
+        form.helper = FormHelper()
+        form.helper.layout = Layout(
+            InlineField("first_name", wrapper_class="col-4"),
+            InlineField("is_company", wrapper_class="col-4"),
+        )
+        form.helper.form_class = "row row-cols-lg-auto align-items-center"
+        assert parse_form(form) == parse_expected("test_inline_field.html")

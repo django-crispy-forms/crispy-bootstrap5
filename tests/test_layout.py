@@ -22,7 +22,7 @@ from .forms import (
     SampleForm4,
     SampleForm6,
 )
-from .utils import contains_partial
+from .utils import contains_partial, parse_expected, parse_form
 
 
 def test_invalid_unicode_characters(settings):
@@ -486,14 +486,8 @@ def test_bootstrap5_form_inline():
     form.helper.form_class = "form-inline"
     form.helper.field_template = "bootstrap5/layout/inline_field.html"
     form.helper.layout = Layout("email", "password1", "last_name")
-
-    html = render_crispy_form(form)
-    assert html.count('class="form-inline"') == 1
-    assert html.count('class="input-group"') == 3
-    assert html.count('<label for="id_email" class="sr-only') == 1
-    assert html.count('id="div_id_email" class="input-group"') == 1
-    assert html.count('placeholder="email"') == 1
-    assert html.count("</label> <input") == 3
+    form.helper.form_class = "row row-cols-lg-auto"
+    assert parse_form(form) == parse_expected("test_bootstrap5_form_inline.html")
 
 
 def test_update_attributes_class():
