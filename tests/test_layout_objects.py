@@ -227,25 +227,16 @@ class TestBootstrapLayoutObjects:
         assert html.count('form-check-inline"') == 2
 
     def test_accordion_and_accordiongroup(self, settings):
-        test_form = SampleForm()
-        test_form.helper = FormHelper()
-        test_form.helper.layout = Layout(
+        form = SampleForm()
+        form.helper = FormHelper()
+        form.helper.form_tag = False
+        form.helper.layout = Layout(
             Accordion(
                 AccordionGroup("one", "first_name"),
                 AccordionGroup("two", "password1", "password2"),
             )
         )
-        html = render_crispy_form(test_form)
-
-        assert html.count('<div id="accordion"') == 1
-        assert html.count('<div class="card mb-2"') == 2
-        assert html.count('<div class="card-header"') == 2
-
-        assert html.count('<div id="one"') == 1
-        assert html.count('<div id="two"') == 1
-        assert html.count('name="first_name"') == 1
-        assert html.count('name="password1"') == 1
-        assert html.count('name="password2"') == 1
+        assert parse_form(form) == parse_expected("accordion.html")
 
     def test_accordion_active_false_not_rendered(self, settings):
         test_form = SampleForm()
@@ -262,7 +253,10 @@ class TestBootstrapLayoutObjects:
 
         accordion_class = "collapse show"
 
-        assert html.count('<div id="one" class="%s"' % accordion_class) == 1
+        assert (
+            html.count('<div id="one" class="accordion-collapse %s"' % accordion_class)
+            == 1
+        )
 
         test_form.helper.layout = Layout(
             Accordion(
@@ -272,7 +266,10 @@ class TestBootstrapLayoutObjects:
 
         # This time, it shouldn't be there at all.
         html = render_crispy_form(test_form)
-        assert html.count('<div id="one" class="%s collapse in"' % accordion_class) == 0
+        assert (
+            html.count('<div id="one" class="accordion-collapse %s"' % accordion_class)
+            == 0
+        )
 
     def test_alert(self):
         test_form = SampleForm()
