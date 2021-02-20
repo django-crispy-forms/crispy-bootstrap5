@@ -3,7 +3,7 @@ repos:
     rev: 20.8b1
     hooks:
       - id: black
-  -   repo: https://github.com/timothycrosley/isort
+  -   repo: https://github.com/pycqa/isort
       rev: 5.7.0
       hooks:
       - id: isort
