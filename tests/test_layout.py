@@ -1,5 +1,11 @@
 import pytest
-from crispy_forms.bootstrap import Field, InlineCheckboxes
+from crispy_forms.bootstrap import (
+    AppendedText,
+    Field,
+    InlineCheckboxes,
+    PrependedAppendedText,
+    PrependedText,
+)
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Column, Fieldset, Layout, Row
 from crispy_forms.utils import render_crispy_form
@@ -16,6 +22,7 @@ from .forms import (
     CrispyEmptyChoiceTestModel,
     CrispyTestModel,
     FileForm,
+    InputsFrom,
     SampleForm,
     SampleForm2,
     SampleForm3,
@@ -488,6 +495,24 @@ def test_bootstrap5_form_inline():
     form.helper.layout = Layout("email", "password1", "last_name")
     form.helper.form_class = "row row-cols-lg-auto"
     assert parse_form(form) == parse_expected("test_bootstrap5_form_inline.html")
+
+
+def test_select():
+    form = InputsFrom()
+    form.helper = FormHelper()
+    form.helper.layout = Layout("select_input")
+    assert parse_form(form) == parse_expected("test_select.html")
+
+
+def test_select_prepended():
+    form = InputsFrom()
+    form.helper = FormHelper()
+    form.helper.layout = Layout(
+        PrependedText("select_input", "bar"),
+        AppendedText("select_input", "bar"),
+        PrependedAppendedText("select_input", "£", ".00"),
+    )
+    assert parse_form(form) == parse_expected("test_prepended_appended_select.html")
 
 
 def test_update_attributes_class():

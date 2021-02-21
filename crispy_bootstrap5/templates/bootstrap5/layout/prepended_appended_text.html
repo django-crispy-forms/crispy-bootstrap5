@@ -13,14 +13,25 @@
 
         <div class="{{ field_class }}">
             <div class="input-group{% if input_size %} {{ input_size }}{% endif %}">
+                {# prepend #}
                 {% if crispy_prepended_text %}
                     <span class="input-group-text">{{ crispy_prepended_text|safe }}</span>
                 {% endif %}
-                {% if field.errors %}
+
+                {# input #}
+                {% if field|is_select %}
+                    {% if field.errors %}
+                        {% crispy_field field 'class' 'form-select is-invalid' %}
+                    {% else %}
+                        {% crispy_field field 'class' 'form-select' %}
+                    {% endif %}
+                {% elif field.errors %}
                     {% crispy_field field 'class' 'form-control is-invalid' %}
                 {% else %}
                     {% crispy_field field 'class' 'form-control' %}
                 {% endif %}
+                
+                {# append #}
                 {% if crispy_appended_text %}
                     <span class="input-group-text">{{ crispy_appended_text|safe }}</span>
                 {% endif %}

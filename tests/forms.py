@@ -225,3 +225,4 @@ class InputsFrom(forms.Form):
     single_checkbox = forms.CharField(
         label="company", required=False, widget=forms.CheckboxInput()
     )
+    select_input = forms.ChoiceField(choices=choices)
