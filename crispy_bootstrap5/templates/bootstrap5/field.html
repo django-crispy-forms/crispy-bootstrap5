@@ -40,6 +40,12 @@
                     {% if field|is_file and field|is_clearable_file %}
                     {# clearable files are more complex, potentially need a checkbox -- let Django render these for now #}
                         {% crispy_field field %}
+                    {% elif field|is_select %}
+                        {% if field.errors %}
+                            {% crispy_field field 'class' 'form-select is-invalid' %}
+                        {% else %}
+                            {% crispy_field field 'class' 'form-select' %}
+                        {% endif %}
                     {% elif field.errors %}
                         {% crispy_field field 'class' 'form-control is-invalid' %}
                     {% else %}
