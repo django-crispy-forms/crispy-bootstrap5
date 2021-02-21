@@ -36,7 +36,7 @@
                 </label>
                 {% include 'bootstrap5/layout/help_text_and_errors.html' %}
             {% else %}
-                <div {% if field_class %}class="{{ field_class }}"{% endif %}>
+                {% if field_class %}<div class="{{ field_class }}">{% endif %}
                     {% if field|is_file and field|is_clearable_file %}
                     {# clearable files are more complex, potentially need a checkbox -- let Django render these for now #}
                         {% crispy_field field %}
@@ -52,7 +52,7 @@
                         {% crispy_field field 'class' 'form-control' %}
                     {% endif %}
                     {% include 'bootstrap5/layout/help_text_and_errors.html' %}
-                </div>
+                {% if field_class %}</div>{% endif %}
             {% endif %}
         {% endif %}
     </{% if tag %}{{ tag }}{% else %}div{% endif %}>
