@@ -1,6 +1,11 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
-## 0.2 (2020-01-31)
+## 0.3 (2021-02-21)
+* Fixed rendering of select widgets (#31)
+
+See [Milestones](https://github.com/django-crispy-forms/crispy-bootstrap5/milestone/3?closed=1) for full changelog.
+
+## 0.2 (2021-01-31)
 * Tested for compatibility with Bootstrap5 Beta 1
 * Fixed InlineField (#28)
 * Implemented new Bootstrap5 accordion (#24)
