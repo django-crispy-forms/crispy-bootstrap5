@@ -195,7 +195,7 @@ def test_layout_fieldset_row_html_with_unicode_fieldnames(settings):
     assert 'id="row_passwords"' in html
     assert html.count("<label") == 6
 
-    assert 'class="form-row rows"' in html
+    assert 'class="row rows"' in html
 
     assert "Hello!" in html
     assert "testLink" in html
@@ -550,3 +550,15 @@ def test_file_field():
         '<input type="file" name="file_field" class="fileinput fileUpload '
         'form-control" required id="id_file_field">' in html
     )
+
+
+def test_row():
+    form = SampleForm()
+    form.helper = FormHelper()
+    form.helper.layout = Layout(
+        Row(
+            Column("first_name"),
+            Column("last_name"),
+        )
+    )
+    assert parse_form(form) == parse_expected("row.html")
