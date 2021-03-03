@@ -1,5 +1,10 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
+## 0.3.1(2021-03-03)
+* Fixed classes for `row` layout object (#36)
+
+See [Milestones](https://github.com/django-crispy-forms/crispy-bootstrap5/milestone/4?closed=1) for full changelog.
+
 ## 0.3 (2021-02-21)
 * Fixed rendering of select widgets (#31)
 
