@@ -310,7 +310,7 @@ class TestBootstrapLayoutObjects:
         assert (
             html.count(
                 '<ul class="nav nav-tabs"> <li class="nav-item">'
-                '<a class="nav-link active" href="#custom-name" data-toggle="tab">'
+                '<a class="nav-link active" href="#custom-name" data-bs-toggle="tab">'
                 "One</a></li>"
             )
             == 1
