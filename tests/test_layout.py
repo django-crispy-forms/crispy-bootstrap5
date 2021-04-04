@@ -5,6 +5,7 @@ from crispy_forms.bootstrap import (
     InlineCheckboxes,
     PrependedAppendedText,
     PrependedText,
+    FieldWithButtons
 )
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Column, Fieldset, Layout, Row
@@ -196,6 +197,7 @@ def test_layout_fieldset_row_html_with_unicode_fieldnames(settings):
     assert html.count("<label") == 6
 
     assert 'class="row rows"' in html
+    assert 'class="form-label' in html
 
     assert "Hello!" in html
     assert "testLink" in html
@@ -294,6 +296,27 @@ def test_bs5_column_css_classes(settings):
     assert html.count("col-md") == 2
     assert html.count("col-sm") == 1
 
+
+def test_bs5_field_with_buttons_css_classes(settings):
+    template = Template(
+        """
+        {% load crispy_forms_tags %}
+        {% crispy form form_helper %}
+    """
+    )
+
+    form = SampleForm()
+    form_helper = FormHelper()
+    form_helper.add_layout(
+        Layout(
+            Column(FieldWithButtons("first_name", HTML("""<a role='button' class='btn btn-primary' href='#'>click me</a>"""))),
+        )
+    )
+
+    c = Context({"form": form, "form_helper": form_helper})
+    html = template.render(c)
+
+    assert 'class="form-label' in html
 
 def test_formset_layout(settings):
     SampleFormSet = formset_factory(SampleForm, extra=3)
