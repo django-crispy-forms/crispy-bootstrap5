@@ -46,6 +46,8 @@
                         {% else %}
                             {% crispy_field field 'class' 'form-select' %}
                         {% endif %}
+		    {% elif field|is_checkbox %}
+                        {% crispy_field field 'class' 'form-check_input' %}
                     {% elif field.errors %}
                         {% crispy_field field 'class' 'form-control is-invalid' %}
                     {% else %}
