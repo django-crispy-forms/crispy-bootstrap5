@@ -306,17 +306,14 @@ def test_bs5_field_with_buttons_css_classes(settings):
     )
 
     form = SampleForm()
-    form_helper = FormHelper()
-    form_helper.add_layout(
+    form.helper = FormHelper()
+    form.helper.add_layout(
         Layout(
             Column(FieldWithButtons("first_name", HTML("""<a role='button' class='btn btn-primary' href='#'>click me</a>"""))),
         )
     )
 
-    c = Context({"form": form, "form_helper": form_helper})
-    html = template.render(c)
-
-    assert 'class="form-label' in html
+    assert parse_form(form) == parse_expected("field_with_buttons.html")
 
 def test_formset_layout(settings):
     SampleFormSet = formset_factory(SampleForm, extra=3)
