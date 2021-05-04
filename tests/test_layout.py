@@ -391,7 +391,7 @@ def test_formset_layout(settings):
     assert html.count("Note for first form only") == 1
     assert html.count("row") == 3
 
-    assert html.count("mb-3") == 18
+    assert html.count("mb-3") == 21
 
 
 def test_modelformset_layout():
@@ -608,3 +608,10 @@ def test_html_label_escape():
     form.helper.layout = Layout("text_input")
     html = render_crispy_form(form)
     assert "&lt;&gt;&amp;" in html
+
+def test_tabular_formset_layout():
+    SampleFormSet = formset_factory(SampleForm, extra=3)
+    formset = SampleFormSet()
+    formset.helper = FormHelper()
+    formset.helper.template = "bootstrap5/table_inline_formset.html"
+    assert parse_form(formset) == parse_expected("test_tabular_formset_layout.html")
