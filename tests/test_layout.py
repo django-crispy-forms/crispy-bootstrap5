@@ -2,10 +2,11 @@ import pytest
 from crispy_forms.bootstrap import (
     AppendedText,
     Field,
+    FieldWithButtons,
     InlineCheckboxes,
     PrependedAppendedText,
     PrependedText,
-    FieldWithButtons
+    StrictButton,
 )
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Column, Fieldset, Layout, Row
@@ -298,22 +299,34 @@ def test_bs5_column_css_classes(settings):
 
 
 def test_bs5_field_with_buttons_css_classes(settings):
-    template = Template(
-        """
-        {% load crispy_forms_tags %}
-        {% crispy form form_helper %}
-    """
-    )
-
     form = SampleForm()
     form.helper = FormHelper()
     form.helper.add_layout(
         Layout(
-            Column(FieldWithButtons("first_name", HTML("""<a role='button' class='btn btn-primary' href='#'>click me</a>"""))),
+            Column(
+                FieldWithButtons(
+                    "email",
+                    HTML("""<a role='button' class='btn btn-primary'>click me</a>"""),
+                )
+            ),
         )
     )
 
     assert parse_form(form) == parse_expected("field_with_buttons.html")
+
+    form = SampleForm3({})
+    form.helper = FormHelper()
+    form.helper.add_layout(
+        Layout(
+            Column(
+                FieldWithButtons(
+                    "email", StrictButton("Go!", css_class="btn-outline-secondary")
+                )
+            ),
+        )
+    )
+    assert parse_form(form) == parse_expected("field_with_buttons_failing.html")
+
 
 def test_formset_layout(settings):
     SampleFormSet = formset_factory(SampleForm, extra=3)

@@ -400,8 +400,6 @@ class TestBootstrapLayoutObjects:
         assert html.count('name="whatever"') == 1
         assert html.count('value="something"') == 1
 
-        assert html.count('class="input-group-append') == 1
-
     def test_hidden_fields(self):
         form = SampleForm()
         # All fields hidden
