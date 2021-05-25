@@ -1,5 +1,9 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
+## Next Release (TBC)
+* Dropped support for Django 3.0
+* Added support for Django 3.2
+
 ## 0.3.1(2021-03-03)
 * Fixed classes for `row` layout object (#36)
 
