@@ -25,7 +25,7 @@ from django.utils.translation import gettext as _
 
 from crispy_bootstrap5.bootstrap5 import FloatingField
 
-from .forms import CheckboxesSampleForm, InputsFrom, SampleForm
+from .forms import CheckboxesSampleForm, InputsForm, SampleForm
 from .utils import parse_expected, parse_form
 
 
@@ -167,7 +167,7 @@ def test_remove_labels():
     ],
 )
 def test_inputs(input, expected):
-    form = InputsFrom()
+    form = InputsForm()
     form.helper = FormHelper()
     form.helper.layout = Layout(input)
     assert parse_form(form) == parse_expected(expected)

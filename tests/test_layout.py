@@ -24,7 +24,7 @@ from .forms import (
     CrispyEmptyChoiceTestModel,
     CrispyTestModel,
     FileForm,
-    InputsFrom,
+    InputsForm,
     SampleForm,
     SampleForm2,
     SampleForm3,
@@ -531,14 +531,14 @@ def test_bootstrap5_form_inline():
 
 
 def test_select():
-    form = InputsFrom()
+    form = InputsForm()
     form.helper = FormHelper()
     form.helper.layout = Layout("select_input")
     assert parse_form(form) == parse_expected("test_select.html")
 
 
 def test_select_prepended():
-    form = InputsFrom()
+    form = InputsForm()
     form.helper = FormHelper()
     form.helper.layout = Layout(
         PrependedText("select_input", "bar"),
