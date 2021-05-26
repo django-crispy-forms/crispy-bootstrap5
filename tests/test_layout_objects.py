@@ -23,7 +23,9 @@ from django.template import Context, Template
 from django.utils.translation import activate, deactivate
 from django.utils.translation import gettext as _
 
-from .forms import CheckboxesSampleForm, InputsFrom, SampleForm
+from crispy_bootstrap5.bootstrap5 import FloatingField
+
+from .forms import CheckboxesSampleForm, InputsForm, SampleForm
 from .utils import parse_expected, parse_form
 
 
@@ -165,7 +167,7 @@ def test_remove_labels():
     ],
 )
 def test_inputs(input, expected):
-    form = InputsFrom()
+    form = InputsForm()
     form.helper = FormHelper()
     form.helper.layout = Layout(input)
     assert parse_form(form) == parse_expected(expected)
@@ -459,3 +461,19 @@ class TestBootstrapLayoutObjects:
         )
         form.helper.form_class = "row row-cols-lg-auto align-items-center"
         assert parse_form(form) == parse_expected("test_inline_field.html")
+
+    def test_float_field(self):
+        form = SampleForm()
+        form.helper = FormHelper()
+        form.helper.layout = Layout(
+            FloatingField("first_name"),
+        )
+        assert parse_form(form) == parse_expected("test_floating_field.html")
+
+        form = InputsForm({})
+        form.helper = FormHelper()
+        form.helper.layout = Layout(
+            FloatingField("text_area"),
+            FloatingField("select_input"),
+        )
+        assert parse_form(form) == parse_expected("test_floating_field_failing.html")

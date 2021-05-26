@@ -212,7 +212,7 @@ class FileForm(forms.Form):
     )
 
 
-class InputsFrom(forms.Form):
+class InputsForm(forms.Form):
     choices = ((1, "Option one"), (2, "Option two"), (3, "Option three"))
     text_input = forms.CharField()
     text_area = forms.CharField(widget=forms.Textarea())

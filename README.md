@@ -28,6 +28,18 @@ for your project::
 
     CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+## What's new?
+
+Bootstrap 5 introduces [floating labels](https://getbootstrap.com/docs/5.0/forms/floating-labels/).
+This template pack include a layout object to use this input type::
+
+    from crispy_bootstrap5.bootstrap5 import FloatingField
+    
+    # then in your Layout
+    ... Layout(
+        FloatingField("first_name"),
+    )
+
 ## Development
 
 To contribute to this library, first checkout the code. Then create a new virtual environment:
