@@ -469,3 +469,11 @@ class TestBootstrapLayoutObjects:
             FloatingField("first_name"),
         )
         assert parse_form(form) == parse_expected("test_floating_field.html")
+
+        form = InputsForm({})
+        form.helper = FormHelper()
+        form.helper.layout = Layout(
+            FloatingField("text_area"),
+            FloatingField("select_input"),
+        )
+        assert parse_form(form) == parse_expected("test_floating_field_failing.html")
