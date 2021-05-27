@@ -1,6 +1,6 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
-## Next Release (2021-05-27)
+## 0.4 (2021-05-27)
 * Added support for Bootstrap 5 Floating Labels (#42)
 * Dropped support for Django 3.0
 * Added support for Django 3.2
