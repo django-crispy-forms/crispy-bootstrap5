@@ -1,8 +1,11 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
-## Next Release (TBC)
+## Next Release (2021-05-27)
+* Added support for Bootstrap 5 Floating Labels (#42)
 * Dropped support for Django 3.0
 * Added support for Django 3.2
+
+See [Milestones](https://github.com/django-crispy-forms/crispy-bootstrap5/milestone/5?closed=1) for full changelog.
 
 ## 0.3.1(2021-03-03)
 * Fixed classes for `row` layout object (#36)
