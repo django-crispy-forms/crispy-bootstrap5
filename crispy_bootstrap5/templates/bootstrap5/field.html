@@ -37,9 +37,8 @@
                 {% include 'bootstrap5/layout/help_text_and_errors.html' %}
             {% else %}
                 {% if field_class %}<div class="{{ field_class }}">{% endif %}
-                    {% if field|is_file and field|is_clearable_file %}
-                    {# clearable files are more complex, potentially need a checkbox -- let Django render these for now #}
-                        {% crispy_field field %}
+                    {% if field|is_file %}
+                        {% include 'bootstrap5/layout/field_file.html' %}
                     {% elif field|is_select %}
                         {% if field.errors %}
                             {% crispy_field field 'class' 'form-select is-invalid' %}
