@@ -575,13 +575,13 @@ def test_file_field():
         'input type="checkbox" name="clearable_file-clear" id="clearable_file-clear_id'
         in html
     )
-    assert '<input type="file" name="clearable_file" class="clearablefileinput"' in html
+    assert '<input type="file" name="clearable_file" class="form-control"' in html
 
     form.helper.layout = Layout("file_field")
     html = render_crispy_form(form)
     assert (
-        '<input type="file" name="file_field" class="fileinput fileUpload '
-        'form-control" required id="id_file_field">' in html
+        '<input type="file" name="file_field" class="'
+        'form-control" id="id_file_field" required>' in html
     )
 
 
