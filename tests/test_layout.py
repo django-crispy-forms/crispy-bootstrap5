@@ -570,19 +570,12 @@ def test_file_field():
     form = FileForm()
     form.helper = FormHelper()
     form.helper.layout = Layout("clearable_file")
-    html = render_crispy_form(form)
-    assert (
-        'input type="checkbox" name="clearable_file-clear" id="clearable_file-clear_id'
-        in html
-    )
-    assert '<input type="file" name="clearable_file" class="form-control"' in html
+
+    assert parse_form(form) == parse_expected("test_clearable_file_field.html")
 
     form.helper.layout = Layout("file_field")
-    html = render_crispy_form(form)
-    assert (
-        '<input type="file" name="file_field" class="'
-        'form-control" id="id_file_field" required>' in html
-    )
+
+    assert parse_form(form) == parse_expected("test_file_field.html")
 
 
 def test_row():
