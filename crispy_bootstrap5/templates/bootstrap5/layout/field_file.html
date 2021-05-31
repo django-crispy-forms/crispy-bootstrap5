@@ -22,14 +22,6 @@
 {% endif %}
 <div class="input-group mb-0 {% if field.errors %} is-invalid{%endif%}">
     <input type="{{ widget.data.type }}" name="{{ widget.data.name }}" class="form-control{% if widget.data.attrs.class %} {{ widget.data.attrs.class }}{% endif %}{% if field.errors %} is-invalid{%endif%}"{% if field.field.disabled %} disabled{% endif %}{% for name, value in widget.data.attrs.items %}{% if value is not False and name != 'class' %} {{ name }}{% if value is not True %}="{{ value|stringformat:'s' }}"{% endif %}{% endif %}{% endfor %}>
-    {% if not widget.data.is_initial %}
-    {% include 'bootstrap5/layout/help_text_and_errors.html' %}
-    {% endif %}
 </div>
-{% if widget.data.is_initial %}
-<div class="input-group mb-0">
-{% include 'bootstrap5/layout/help_text_and_errors.html' %}
-</div>
-{% endif %}
 {% endfor %}
 </div>
