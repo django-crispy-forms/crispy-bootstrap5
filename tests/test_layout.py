@@ -24,6 +24,7 @@ from .forms import (
     CrispyEmptyChoiceTestModel,
     CrispyTestModel,
     FileForm,
+    FileFormRequired,
     InputsForm,
     SampleForm,
     SampleForm2,
@@ -576,6 +577,16 @@ def test_file_field():
     form.helper.layout = Layout("file_field")
 
     assert parse_form(form) == parse_expected("test_file_field.html")
+
+    form = FileFormRequired({})
+    form.helper = FormHelper()
+    form.helper.layout = Layout("clearable_file")
+
+    assert parse_form(form) == parse_expected("test_clearable_file_field_failing.html")
+
+    form.helper.layout = Layout("file_field")
+
+    assert parse_form(form) == parse_expected("test_file_field_failing.html")
 
 
 def test_row():
