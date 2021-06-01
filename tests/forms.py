@@ -212,6 +212,11 @@ class FileForm(forms.Form):
     )
 
 
+class FileFormRequired(forms.Form):
+    file_field = forms.FileField(required=True, widget=forms.FileInput)
+    clearable_file = forms.FileField(required=True, widget=forms.ClearableFileInput)
+
+
 class InputsForm(forms.Form):
     choices = ((1, "Option one"), (2, "Option two"), (3, "Option three"))
     text_input = forms.CharField()
