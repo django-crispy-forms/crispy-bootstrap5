@@ -610,7 +610,7 @@ def test_label_class_and_field_class_bs5_offset_when_horizontal():
     html = render_crispy_form(form)
 
     assert '<div class="mb-3 row">' in html
-    assert '<div class="col-lg-offset-2 col-lg-8">' in html
+    assert '<div class="offset-lg-2 col-lg-8">' in html
     assert html.count("col-lg-8") == 7
 
     # Test multi col-XX-YY pattern and col-X pattern
@@ -621,7 +621,7 @@ def test_label_class_and_field_class_bs5_offset_when_horizontal():
 
     assert '<div class="mb-3 row">' in html
     assert (
-        '<div class="col-sm-offset-3 col-md-offset-4 col-lg-offset-4 col-sm-8'
+        '<div class="offset-sm-3 offset-md-4 offset-lg-4 col-sm-8'
         ' col-md-6 col-7 col-lg-8">' in html
     )
     assert html.count("col-sm-8") == 7

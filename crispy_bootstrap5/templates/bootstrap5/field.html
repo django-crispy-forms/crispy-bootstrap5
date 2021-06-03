@@ -6,7 +6,7 @@
     {% if field|is_checkbox %}
         <div class="mb-3{% if 'form-horizontal' in form_class %} row{% endif %}">
         {% if label_class %}
-            <div class="{% for offset in bootstrap_checkbox_offsets %}{{ offset }} {% endfor %}{{ field_class }}">
+            <div class="{% for offset in bootstrap_checkbox_offsets %}{{ offset|slice:"7:14" }}{{ offset|slice:"4:7" }}{{ offset|slice:"14:16" }} {% endfor %}{{ field_class }}">
         {% endif %}
     {% endif %}
     <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="{% if not field|is_checkbox %}mb-3{% if 'form-horizontal' in form_class %} row{% endif %}{% else %}form-check{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
