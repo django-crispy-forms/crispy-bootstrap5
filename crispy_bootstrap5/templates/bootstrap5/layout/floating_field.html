@@ -12,7 +12,7 @@
     {% endif %}    
     
     <label {% if field.id_for_label %}for="{{ field.id_for_label }}"{% endif %}{% if label_class %} class="{{ label_class }}"{% endif %}>
-        {{ field.label|safe }}
+        {{ field.label }}
     </label>
 
     {% include 'bootstrap5/layout/help_text_and_errors.html' %}
