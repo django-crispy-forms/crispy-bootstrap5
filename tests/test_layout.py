@@ -26,6 +26,7 @@ from .forms import (
     FileForm,
     FileFormRequired,
     InputsForm,
+    LabelForm,
     SampleForm,
     SampleForm2,
     SampleForm3,
@@ -599,3 +600,11 @@ def test_row():
         )
     )
     assert parse_form(form) == parse_expected("row.html")
+
+
+def test_html_label_escape():
+    form = LabelForm()
+    form.helper = FormHelper()
+    form.helper.layout = Layout("text_input")
+    html = render_crispy_form(form)
+    assert "&lt;&gt;&amp;" in html

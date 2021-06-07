@@ -231,3 +231,7 @@ class InputsForm(forms.Form):
         label="company", required=False, widget=forms.CheckboxInput()
     )
     select_input = forms.ChoiceField(choices=choices)
+
+
+class LabelForm(forms.Form):
+    text_input = forms.CharField(label="Test html escape <>&")
