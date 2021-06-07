@@ -609,9 +609,22 @@ def test_html_label_escape():
     html = render_crispy_form(form)
     assert "&lt;&gt;&amp;" in html
 
+
 def test_tabular_formset_layout():
     SampleFormSet = formset_factory(SampleForm, extra=3)
     formset = SampleFormSet()
     formset.helper = FormHelper()
     formset.helper.template = "bootstrap5/table_inline_formset.html"
     assert parse_form(formset) == parse_expected("test_tabular_formset_layout.html")
+
+    SampleFormSet = formset_factory(SampleForm, extra=3)
+    data = {
+        "form-TOTAL_FORMS": "1",
+        "form-INITIAL_FORMS": "0",
+    }
+    formset = SampleFormSet(data)
+    formset.helper = FormHelper()
+    formset.helper.template = "bootstrap5/table_inline_formset.html"
+    assert parse_form(formset) == parse_expected(
+        "test_tabular_formset_layout_failing.html"
+    )
