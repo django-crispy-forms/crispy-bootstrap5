@@ -9,7 +9,7 @@
             <div class="{% for offset in bootstrap_checkbox_offsets %}{{ offset|slice:"7:14" }}{{ offset|slice:"4:7" }}{{ offset|slice:"14:16" }} {% endfor %}{{ field_class }}">
         {% endif %}
     {% endif %}
-    <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="{% if not field|is_checkbox %}mb-3{% if 'form-horizontal' in form_class %} row{% endif %}{% else %}form-check{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
+    <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="mb-3{% if 'form-horizontal' in form_class %} row{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
         {% if field.label and not field|is_checkbox and form_show_labels %}
             <label {% if field.id_for_label %}for="{{ field.id_for_label }}"{% endif %} class="{% if 'form-horizontal' in form_class %}col-form-label{% else %}form-label{% endif %}{% if label_class %} {{ label_class }}{% endif %}{% if field.field.required %} requiredField{% endif %}">
                 {{ field.label }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
@@ -44,6 +44,12 @@
                             {% crispy_field field 'class' 'form-select is-invalid' %}
                         {% else %}
                             {% crispy_field field 'class' 'form-select' %}
+                        {% endif %}
+                    {% elif field|is_checkbox %}
+                        {% if field.errors %}
+                            {% crispy_field field 'class' 'form-check-input is-invalid' %}
+                        {% else %}
+                            {% crispy_field field 'class' 'form-check-input' %}
                         {% endif %}
                     {% elif field.errors %}
                         {% crispy_field field 'class' 'form-control is-invalid' %}
