@@ -628,3 +628,15 @@ def test_tabular_formset_layout():
     assert parse_form(formset) == parse_expected(
         "test_tabular_formset_layout_failing.html"
     )
+
+
+def test_flat_attrs_safe():
+    form = SampleForm()
+    form.helper = FormHelper()
+    form.helper.layout = Layout(
+        Row(
+            aria_labelledby="test<>%",
+        )
+    )
+    form.helper.form_tag = False
+    assert parse_form(form) == parse_expected("flat_attrs.html")
