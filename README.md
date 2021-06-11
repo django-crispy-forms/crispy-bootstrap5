@@ -40,6 +40,23 @@ This template pack include a layout object to use this input type::
         FloatingField("first_name"),
     )
 
+Accordions also have new features, such as [Accordion flush](https://getbootstrap.com/docs/5.0/components/accordion/#flush) and [Always open](https://getbootstrap.com/docs/5.0/components/accordion/#always-open).
+There is a new layout object to use them::
+
+    from crispy_bootstrap5.bootstrap5 import BS5Accordion
+
+    # then in your Layout
+    # if not informed, flush and always_open default to False
+    ... Layout(
+        BS5Accordion(
+            AccordionGroup("group name", "form_field_1", "form_field_2"),
+            AccordionGroup("another group name", "form_field"),
+            flush=True,
+            always_open=True
+        )
+    )
+
+
 ## Development
 
 To contribute to this library, first checkout the code. Then create a new virtual environment:

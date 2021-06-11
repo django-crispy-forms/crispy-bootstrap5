@@ -1,3 +1,5 @@
+import random
+
 import pytest
 from crispy_forms.bootstrap import (
     Accordion,
@@ -22,7 +24,7 @@ from django.template import Context, Template
 from django.utils.translation import activate, deactivate
 from django.utils.translation import gettext as _
 
-from crispy_bootstrap5.bootstrap5 import FloatingField
+from crispy_bootstrap5.bootstrap5 import BS5Accordion, FloatingField
 
 from .forms import (
     CheckboxesSampleForm,
@@ -221,7 +223,8 @@ class TestBootstrapLayoutObjects:
         html = render_crispy_form(test_form)
         assert html.count('form-check-inline"') == 2
 
-    def test_accordion_and_accordiongroup(self, settings):
+    def test_accordion_and_accordiongroup(self):
+        random.seed(0)
         form = SampleForm()
         form.helper = FormHelper()
         form.helper.form_tag = False
@@ -233,7 +236,7 @@ class TestBootstrapLayoutObjects:
         )
         assert parse_form(form) == parse_expected("accordion.html")
 
-    def test_accordion_active_false_not_rendered(self, settings):
+    def test_accordion_active_false_not_rendered(self):
         test_form = SampleForm()
         test_form.helper = FormHelper()
         test_form.helper.layout = Layout(
@@ -265,6 +268,80 @@ class TestBootstrapLayoutObjects:
             html.count('<div id="one" class="accordion-collapse %s"' % accordion_class)
             == 0
         )
+
+    def test_bs5accordion(self):
+        random.seed(0)
+        form = SampleForm()
+        form.helper = FormHelper()
+        form.helper.form_tag = False
+        form.helper.layout = Layout(
+            BS5Accordion(
+                AccordionGroup("one", "first_name"),
+                AccordionGroup("two", "password1", "password2"),
+            )
+        )
+        assert parse_form(form) == parse_expected("accordion.html")
+
+    def test_bs5accordion_active_false_not_rendered(self):
+        test_form = SampleForm()
+        test_form.helper = FormHelper()
+        test_form.helper.layout = Layout(
+            BS5Accordion(
+                AccordionGroup("one", "first_name"),
+                # there is no ``active`` kwarg here.
+            )
+        )
+
+        # The first time, there should be one of them there.
+        html = render_crispy_form(test_form)
+
+        accordion_class = "collapse show"
+
+        assert (
+            html.count('<div id="one" class="accordion-collapse %s"' % accordion_class)
+            == 1
+        )
+
+        test_form.helper.layout = Layout(
+            BS5Accordion(
+                AccordionGroup("one", "first_name", active=False),
+            )  # now ``active`` manually set as False
+        )
+
+        # This time, it shouldn't be there at all.
+        html = render_crispy_form(test_form)
+        assert (
+            html.count('<div id="one" class="accordion-collapse %s"' % accordion_class)
+            == 0
+        )
+
+    def test_bs5accordion_flush(self):
+        random.seed(0)
+        test_form = SampleForm()
+        test_form.helper = FormHelper()
+        test_form.helper.form_tag = False
+        test_form.helper.layout = Layout(
+            BS5Accordion(
+                AccordionGroup("one", "first_name"),
+                AccordionGroup("two", "password1", "password2"),
+                flush=True,
+            )
+        )
+        assert parse_form(test_form) == parse_expected("accordion_flush.html")
+
+    def test_bs5accordion_always_open(self):
+        random.seed(0)
+        test_form = SampleForm()
+        test_form.helper = FormHelper()
+        test_form.helper.form_tag = False
+        test_form.helper.layout = Layout(
+            BS5Accordion(
+                AccordionGroup("one", "first_name"),
+                AccordionGroup("two", "password1", "password2"),
+                always_open=True,
+            )
+        )
+        assert parse_form(test_form) == parse_expected("accordion_always_open.html")
 
     def test_alert(self):
         test_form = SampleForm()
