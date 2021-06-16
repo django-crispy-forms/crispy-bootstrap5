@@ -25,7 +25,15 @@ from django.utils.translation import gettext as _
 
 from crispy_bootstrap5.bootstrap5 import FloatingField
 
-from .forms import CheckboxesSampleForm, InputsForm, SampleForm
+from .forms import (
+    CheckboxesSampleForm,
+    CustomCheckboxSelectMultiple,
+    CustomRadioSelect,
+    GroupedChoiceForm,
+    InputsForm,
+    SampleForm,
+    SampleFormCustomWidgets,
+)
 from .utils import parse_expected, parse_form
 
 
@@ -175,15 +183,9 @@ def test_inputs(input, expected):
 
 class TestBootstrapLayoutObjects:
     def test_custom_django_widget(self, settings):
-        class CustomRadioSelect(forms.RadioSelect):
-            pass
-
-        class CustomCheckboxSelectMultiple(forms.CheckboxSelectMultiple):
-            pass
-
         # Make sure an inherited RadioSelect gets rendered as it
-        form = CheckboxesSampleForm()
-        form.fields["inline_radios"].widget = CustomRadioSelect()
+        form = SampleFormCustomWidgets()
+        assert isinstance(form.fields["inline_radios"].widget, CustomRadioSelect)
         form.helper = FormHelper()
         form.helper.layout = Layout("inline_radios")
 
@@ -192,7 +194,9 @@ class TestBootstrapLayoutObjects:
         assert 'class="form-check-input"' in html
 
         # Make sure an inherited CheckboxSelectMultiple gets rendered as it
-        form.fields["checkboxes"].widget = CustomCheckboxSelectMultiple()
+        assert isinstance(
+            form.fields["checkboxes"].widget, CustomCheckboxSelectMultiple
+        )
         form.helper.layout = Layout("checkboxes")
         html = render_crispy_form(form)
         assert 'class="form-check-input"' in html
@@ -424,8 +428,7 @@ class TestBootstrapLayoutObjects:
     def test_multiplecheckboxes(self, settings):
         test_form = CheckboxesSampleForm()
         html = render_crispy_form(test_form)
-
-        assert html.count('checked="checked"') == 6
+        assert html.count("checked") == 6
 
         test_form.helper = FormHelper(test_form)
         test_form.helper[1].wrap(InlineCheckboxes, inline=True)
@@ -438,18 +441,18 @@ class TestBootstrapLayoutObjects:
         html = render_crispy_form(test_form)
 
         expected_ids = [
+            "checkboxes_0",
             "checkboxes_1",
             "checkboxes_2",
-            "checkboxes_3",
+            "alphacheckboxes_0",
             "alphacheckboxes_1",
             "alphacheckboxes_2",
-            "alphacheckboxes_3",
+            "numeric_multiple_checkboxes_0",
             "numeric_multiple_checkboxes_1",
             "numeric_multiple_checkboxes_2",
-            "numeric_multiple_checkboxes_3",
         ]
         for id_suffix in expected_ids:
-            expected_str = 'id="id_{id_suffix}"'.format(id_suffix=id_suffix)
+            expected_str = f'id="id_{id_suffix}"'
             assert html.count(expected_str) == 1
 
     def test_inline_field(self):
@@ -477,3 +480,20 @@ class TestBootstrapLayoutObjects:
             FloatingField("select_input"),
         )
         assert parse_form(form) == parse_expected("test_floating_field_failing.html")
+
+    def test_grouped_checkboxes_radios(self):
+        form = GroupedChoiceForm()
+        form.helper = FormHelper()
+        form.helper.layout = Layout("checkbox_select_multiple")
+        assert parse_form(form) == parse_expected("test_grouped_checkboxes.html")
+        form.helper.layout = Layout("radio")
+        assert parse_form(form) == parse_expected("test_grouped_radios.html")
+
+        form = GroupedChoiceForm({})
+        form.helper = FormHelper()
+        form.helper.layout = Layout("checkbox_select_multiple")
+        assert parse_form(form) == parse_expected(
+            "test_grouped_checkboxes_failing.html"
+        )
+        form.helper.layout = Layout("radio")
+        assert parse_form(form) == parse_expected("test_grouped_radios_failing.html")
