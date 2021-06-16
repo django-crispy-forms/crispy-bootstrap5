@@ -284,3 +284,12 @@ class GroupedChoiceForm(forms.Form):
         widget=forms.CheckboxSelectMultiple, choices=choices
     )
     radio = forms.MultipleChoiceField(widget=forms.RadioSelect, choices=choices)
+
+
+class HelpTextForm(forms.Form):
+    email = forms.EmailField(
+        label="email",
+        required=True,
+        widget=forms.TextInput(),
+        help_text="Insert your email<>&",
+    )
