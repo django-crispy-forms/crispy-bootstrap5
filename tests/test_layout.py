@@ -25,6 +25,7 @@ from .forms import (
     CrispyTestModel,
     FileForm,
     FileFormRequired,
+    HelpTextForm,
     InputsForm,
     LabelForm,
     SampleForm,
@@ -640,3 +641,10 @@ def test_flat_attrs_safe():
     )
     form.helper.form_tag = False
     assert parse_form(form) == parse_expected("flat_attrs.html")
+
+
+def test_help_text_escape():
+    form = HelpTextForm()
+    form.helper = FormHelper()
+    form.helper.form_tag = False
+    assert parse_form(form) == parse_expected("help_text_escape.html")
