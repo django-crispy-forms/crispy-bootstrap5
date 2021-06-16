@@ -3,16 +3,19 @@
 
 <div {% if field_class %}class="{{ field_class }}"{% endif %}{% if flat_attrs %} {{ flat_attrs }}{% endif %}>
 
-    {% for choice in field.field.choices %}
+    {% for group, options, index in field|optgroups %}
+    {% if group %}<strong>{{ group }}</strong>{% endif %}
+    {% for option in options %}
     <div class="form-check{% if inline_class %} form-check-inline{% endif %}">
-        <input type="checkbox" class="form-check-input{% if field.errors %} is-invalid{% endif %}"{% if choice.0 in field.value or choice.0|stringformat:"s" in field.value or choice.0|stringformat:"s" == field.value|default_if_none:""|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {{ field.field.widget.attrs|flatatt }}>
-        <label class="form-check-label" for="id_{{ field.html_name }}_{{ forloop.counter }}">
-            {{ choice.1|unlocalize }}
+        <input type="checkbox" class="form-check-input{% if field.errors %} is-invalid{% endif %}" name="{{ field.html_name }}" value="{{ option.value|unlocalize }}" {% include "bootstrap5/layout/attrs.html" with widget=option %}>
+        <label class="form-check-label" for="{{ option.attrs.id }}">
+            {{ option.label|unlocalize }}
         </label>
-        {% if field.errors and forloop.last and not inline_class %}
+        {% if field.errors and forloop.last and not inline_class and forloop.parentloop.last %}
             {% include 'bootstrap5/layout/field_errors_block.html' %}
             {% endif %}
     </div>
+   {% endfor %}
    {% endfor %}
     {% if field.errors and inline_class %}
         {% for error in field.errors %}

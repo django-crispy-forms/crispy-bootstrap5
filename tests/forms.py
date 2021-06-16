@@ -235,3 +235,52 @@ class InputsForm(forms.Form):
 
 class LabelForm(forms.Form):
     text_input = forms.CharField(label="Test html escape <>&")
+
+
+class CustomRadioSelect(forms.RadioSelect):
+    pass
+
+
+class CustomCheckboxSelectMultiple(forms.CheckboxSelectMultiple):
+    pass
+
+
+class SampleFormCustomWidgets(forms.Form):
+    inline_radios = forms.ChoiceField(
+        choices=(
+            ("option_one", "Option one"),
+            ("option_two", "Option two"),
+        ),
+        widget=CustomRadioSelect,
+        initial="option_two",
+    )
+
+    checkboxes = forms.MultipleChoiceField(
+        choices=((1, "Option one"), (2, "Option two"), (3, "Option three")),
+        initial=(1,),
+        widget=CustomCheckboxSelectMultiple,
+    )
+
+
+class GroupedChoiceForm(forms.Form):
+    choices = [
+        (
+            "Audio",
+            [
+                ("vinyl", "Vinyl"),
+                ("cd", "CD"),
+            ],
+        ),
+        (
+            "Video",
+            [
+                ("vhs", "VHS Tape"),
+                ("dvd", "DVD"),
+            ],
+        ),
+        ("unknown", "Unknown"),
+    ]
+    checkbox_select_multiple = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple, choices=choices
+    )
+    radio = forms.MultipleChoiceField(widget=forms.RadioSelect, choices=choices)
