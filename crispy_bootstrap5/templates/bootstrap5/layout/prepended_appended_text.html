@@ -11,7 +11,7 @@
             </label>
         {% endif %}
 
-        <div class="{{ field_class }}">
+        <div {% if field_class %}class="{{ field_class }}"{% endif %}>
             <div class="input-group{% if input_size %} {{ input_size }}{% endif %}">
                 {# prepend #}
                 {% if crispy_prepended_text %}
