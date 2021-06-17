@@ -16,7 +16,6 @@ from crispy_forms.bootstrap import (
 )
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Field, Layout, MultiWidgetField
-from crispy_forms.tests.utils import contains_partial
 from crispy_forms.utils import render_crispy_form
 from django import forms
 from django.template import Context, Template
@@ -201,30 +200,19 @@ class TestBootstrapLayoutObjects:
         html = render_crispy_form(form)
         assert 'class="form-check-input"' in html
 
-    def test_prepended_appended_text(self, settings):
+    def test_prepended_appended_text(self):
         test_form = SampleForm()
         test_form.helper = FormHelper()
         test_form.helper.layout = Layout(
-            PrependedAppendedText("email", "@", "gmail.com"),
+            PrependedAppendedText(
+                "email", "@", "gmail.com", css_class="form-control-lg"
+            ),
             AppendedText("password1", "#"),
             PrependedText("password2", "$"),
         )
-        html = render_crispy_form(test_form)
-
-        # Check form parameters
-        assert html.count('<span class="input-group-text">@</span>') == 1
-        assert html.count('<span class="input-group-text">gmail.com</span>') == 1
-        assert html.count('<span class="input-group-text">#</span>') == 1
-        assert html.count('<span class="input-group-text">$</span>') == 1
-        test_form.helper.layout = Layout(
-            PrependedAppendedText(
-                "email", "@", "gmail.com", css_class="form-control-lg"
-            )
+        assert parse_form(test_form) == parse_expected(
+            "test_prepended_appended_text.html"
         )
-        html = render_crispy_form(test_form)
-
-        assert 'class="form-control-lg' in html
-        assert contains_partial(html, '<span class="input-group-text"/>')
 
     def test_inline_radios(self, settings):
         test_form = CheckboxesSampleForm()
