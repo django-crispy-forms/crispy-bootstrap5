@@ -205,7 +205,7 @@ class TestBootstrapLayoutObjects:
         test_form.helper = FormHelper()
         test_form.helper.layout = Layout(
             PrependedAppendedText(
-                "email", "@", "gmail.com", css_class="form-control-lg"
+                "email", "@<>&", "gmail.com", css_class="form-control-lg"
             ),
             AppendedText("password1", "#"),
             PrependedText("password2", "$"),
