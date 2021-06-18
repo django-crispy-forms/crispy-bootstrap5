@@ -16,12 +16,8 @@
             </label>
         {% endif %}
 
-        {% if field|is_checkboxselectmultiple %}
-            {% include 'bootstrap5/layout/checkboxselectmultiple.html' %}
-        {% endif %}
-
-        {% if field|is_radioselect %}
-            {% include 'bootstrap5/layout/radioselect.html' %}
+        {% if field|is_checkboxselectmultiple or field|is_radioselect %}
+            {% include 'bootstrap5/layout/radio_checkbox_select.html' %}
         {% endif %}
 
         {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}
