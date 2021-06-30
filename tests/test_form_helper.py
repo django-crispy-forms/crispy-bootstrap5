@@ -22,7 +22,7 @@ from django.utils.translation import gettext_lazy as _
 from .forms import SampleForm, SampleForm7, SampleForm8, SampleFormWithMedia
 
 
-def test_inputs(settings):
+def test_inputs():
     form_helper = FormHelper()
     form_helper.add_input(Submit("my-submit", "Submit", css_class="button white"))
     form_helper.add_input(Reset("my-reset", "Reset"))
@@ -220,7 +220,7 @@ def test_template_helper_access():
     assert helper["form_id"] == "test-form"
 
 
-def test_without_helper(settings):
+def test_without_helper():
     template = Template(
         """
         {% load crispy_forms_tags %}
@@ -494,7 +494,7 @@ def test_bootstrap_form_show_errors_bs5():
     assert html.count("error") == 0
 
 
-def test_error_text_inline(settings):
+def test_error_text_inline():
     form = SampleForm({"email": "invalidemail"})
     form.helper = FormHelper()
     layout = Layout(
