@@ -183,7 +183,7 @@ def test_inputs(input, expected):
 
 
 class TestBootstrapLayoutObjects:
-    def test_custom_django_widget(self, settings):
+    def test_custom_django_widget(self):
         # Make sure an inherited RadioSelect gets rendered as it
         form = SampleFormCustomWidgets()
         assert isinstance(form.fields["inline_radios"].widget, CustomRadioSelect)
@@ -216,7 +216,7 @@ class TestBootstrapLayoutObjects:
             "test_prepended_appended_text.html"
         )
 
-    def test_inline_radios(self, settings):
+    def test_inline_radios(self):
         test_form = CheckboxesSampleForm()
         test_form.helper = FormHelper()
         test_form.helper.layout = Layout(InlineRadios("inline_radios"))
@@ -362,7 +362,7 @@ class TestBootstrapLayoutObjects:
         assert html.count('<div class="alert alert-block"') == 1
         assert html.count("Testing...") == 1
 
-    def test_tab_and_tab_holder(self, settings):
+    def test_tab_and_tab_holder(self):
         test_form = SampleForm()
         test_form.helper = FormHelper()
         test_form.helper.layout = Layout(
@@ -442,7 +442,7 @@ class TestBootstrapLayoutObjects:
         assert 'class="first"' in html
         assert 'class="second"' in html
 
-    def test_field_with_buttons(self, settings):
+    def test_field_with_buttons(self):
         form = SampleForm()
         form.helper = FormHelper()
         form.helper.layout = Layout(
@@ -490,7 +490,7 @@ class TestBootstrapLayoutObjects:
         assert html.count('type="hidden"') == 5
         assert html.count("<label") == 0
 
-    def test_multiplecheckboxes(self, settings):
+    def test_multiplecheckboxes(self):
         test_form = CheckboxesSampleForm()
         html = render_crispy_form(test_form)
         assert html.count("checked") == 6

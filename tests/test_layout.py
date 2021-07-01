@@ -144,7 +144,7 @@ def test_context_pollution():
     assert html.count('name="is_company"') == 1
 
 
-def test_layout_fieldset_row_html_with_unicode_fieldnames(settings):
+def test_layout_fieldset_row_html_with_unicode_fieldnames():
     form_helper = FormHelper()
     form_helper.add_layout(
         Layout(
@@ -245,7 +245,7 @@ def test_change_layout_dynamically_delete_field():
     assert "email" not in html
 
 
-def test_column_has_css_classes(settings):
+def test_column_has_css_classes():
     template = Template(
         """
         {% load crispy_forms_tags %}
@@ -276,7 +276,7 @@ def test_column_has_css_classes(settings):
     assert html.count("col-md") == 1
 
 
-def test_bs5_column_css_classes(settings):
+def test_bs5_column_css_classes():
     template = Template(
         """
         {% load crispy_forms_tags %}
@@ -301,7 +301,7 @@ def test_bs5_column_css_classes(settings):
     assert html.count("col-sm") == 1
 
 
-def test_bs5_field_with_buttons_css_classes(settings):
+def test_bs5_field_with_buttons_css_classes():
     form = SampleForm()
     form.helper = FormHelper()
     form.helper.add_layout(
@@ -331,7 +331,7 @@ def test_bs5_field_with_buttons_css_classes(settings):
     assert parse_form(form) == parse_expected("field_with_buttons_failing.html")
 
 
-def test_formset_layout(settings):
+def test_formset_layout():
     SampleFormSet = formset_factory(SampleForm, extra=3)
     formset = SampleFormSet()
     helper = FormHelper()
@@ -504,7 +504,7 @@ def test_choice_with_none_is_selected():
     assert "checked" in html
 
 
-def test_keepcontext_context_manager(settings):
+def test_keepcontext_context_manager():
     # Test case for issue #180
     # Apparently it only manifest when using render_to_response this exact way
     form = CheckboxesSampleForm()
