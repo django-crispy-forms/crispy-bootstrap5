@@ -7,7 +7,6 @@ class FloatingField(Field):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.attrs["placeholder"] = self.fields[0]
 
 
 class BS5Accordion(Accordion):

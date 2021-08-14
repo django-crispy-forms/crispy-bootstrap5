@@ -7,15 +7,15 @@
     
     {% if field|is_select %}
         {%if field.errors %}
-            {% crispy_field field 'class' 'form-select is-invalid' %}
+            {% crispy_field field 'class' 'form-select is-invalid' 'placeholder' field.name %}
         {% else %}
-            {% crispy_field field 'class' 'form-select' %}
+            {% crispy_field field 'class' 'form-select' 'placeholder' field.name %}
         {% endif %}
     {% else %}
         {% if field.errors %}
-            {% crispy_field field 'class' 'form-control is-invalid' %}
+            {% crispy_field field 'class' 'form-control is-invalid' 'placeholder' field.name %}
         {% else %}
-            {% crispy_field field 'class' 'form-control' %}
+            {% crispy_field field 'class' 'form-control' 'placeholder' field.name %}
         {% endif %} 
     {% endif %} 
     
