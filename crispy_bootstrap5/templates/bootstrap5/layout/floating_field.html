@@ -5,11 +5,19 @@
 {% else %}
     <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="form-floating mb-3{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
     
-    {% if field.errors %}
-        {% crispy_field field 'class' 'form-control is-invalid'%}
+    {% if field|is_select %}
+        {%if field.errors %}
+            {% crispy_field field 'class' 'form-select is-invalid' 'placeholder' field.name %}
+        {% else %}
+            {% crispy_field field 'class' 'form-select' 'placeholder' field.name %}
+        {% endif %}
     {% else %}
-        {% crispy_field field 'class' 'form-control' %}
-    {% endif %}    
+        {% if field.errors %}
+            {% crispy_field field 'class' 'form-control is-invalid' 'placeholder' field.name %}
+        {% else %}
+            {% crispy_field field 'class' 'form-control' 'placeholder' field.name %}
+        {% endif %} 
+    {% endif %} 
     
     <label {% if field.id_for_label %}for="{{ field.id_for_label }}"{% endif %}{% if label_class %} class="{{ label_class }}"{% endif %}>
         {{ field.label }}
