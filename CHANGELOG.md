@@ -1,5 +1,15 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
+## 0.5 (2021-08-20)
+* Added support for [Accordion Flush](https://getbootstrap.com/docs/5.0/components/accordion/#flush) and 
+  [Always Open](https://getbootstrap.com/docs/5.0/components/accordion/#always-open) (#63)
+* Added support for grouped inputs (#64)
+* Added support for clearable file field (#53)
+* Removed various `|safe` filters in templates
+
+See [Milestones](https://github.com/django-crispy-forms/crispy-bootstrap5/milestone/6?closed=1) for full changelog.
+
+
 ## 0.4 (2021-05-27)
 * Added support for Bootstrap 5 Floating Labels (#42)
 * Dropped support for Django 3.0
