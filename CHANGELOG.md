@@ -1,7 +1,8 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
-## 0.5 (TBC)
-* Added support for Accordion Flush and Always Open (#63)
+## 0.5 (2021-08-20)
+* Added support for [Accordion Flush](https://getbootstrap.com/docs/5.0/components/accordion/#flush) and 
+  [Always Open](https://getbootstrap.com/docs/5.0/components/accordion/#always-open) (#63)
 * Added support for grouped inputs (#64)
 * Added support for clearable file field (#53)
 * Removed various `|safe` filters in templates
