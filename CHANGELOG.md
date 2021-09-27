@@ -1,5 +1,8 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
+## 0.6 (TBC)
+* Added Django 4.0 support
+
 ## 0.5 (2021-08-20)
 * Added support for [Accordion Flush](https://getbootstrap.com/docs/5.0/components/accordion/#flush) and 
   [Always Open](https://getbootstrap.com/docs/5.0/components/accordion/#always-open) (#63)
