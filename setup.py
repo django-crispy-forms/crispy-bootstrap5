@@ -2,7 +2,7 @@ import os
 
 from setuptools import setup
 
-VERSION = "0.5"
+VERSION = "0.6"
 
 
 def get_long_description():
@@ -30,7 +30,7 @@ setup(
     license="MIT",
     version=VERSION,
     packages=["crispy_bootstrap5"],
-    install_requires=["django-crispy-forms>=1.12.0", "django>=2.2"],
+    install_requires=["django-crispy-forms>=1.13.0", "django>=2.2"],
     extras_require={"test": ["pytest", "pytest-django"]},
     tests_require=["crispy-bootstrap5[test]"],
     python_requires=">=3.6",
@@ -41,6 +41,7 @@ setup(
         "Framework :: Django :: 2.2",
         "Framework :: Django :: 3.1",
         "Framework :: Django :: 3.2",
+        "Framework :: Django :: 4.0",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
