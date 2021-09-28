@@ -1,6 +1,6 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
-## 0.6 (TBC)
+## 0.6 (2021-09-28)
 * Added Django 4.0 support
 
 ## 0.5 (2021-08-20)
