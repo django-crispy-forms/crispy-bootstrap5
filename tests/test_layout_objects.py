@@ -346,21 +346,12 @@ class TestBootstrapLayoutObjects:
     def test_alert(self):
         test_form = SampleForm()
         test_form.helper = FormHelper()
-        test_form.helper.layout = Layout(Alert(content="Testing..."))
-        html = render_crispy_form(test_form)
-
-        assert html.count('<div class="alert"') == 1
-        assert html.count('<button type="button" class="close"') == 1
-        assert html.count("Testing...") == 1
-
-    def test_alert_block(self):
-        test_form = SampleForm()
-        test_form.helper = FormHelper()
-        test_form.helper.layout = Layout(Alert(content="Testing...", block=True))
-        html = render_crispy_form(test_form)
-
-        assert html.count('<div class="alert alert-block"') == 1
-        assert html.count("Testing...") == 1
+        test_form.helper.form_tag = False
+        test_form.helper.layout = Layout(
+            Alert(content="Testing...", css_class="alert-primary"),
+            Alert(content="Testing...", css_class="alert-primary", dismiss=False),
+        )
+        assert parse_form(test_form) == parse_expected("alert.html")
 
     def test_tab_and_tab_holder(self):
         test_form = SampleForm()
