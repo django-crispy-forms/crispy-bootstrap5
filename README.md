@@ -1,8 +1,20 @@
-# crispy-bootstrap5
+# muckrack-crispy-bootstrap5
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/smithdc1/crispy-bootstrap5/blob/main/LICENSE)
 
-Bootstrap5 template pack for django-crispy-forms
+Muck Rack’s forked version of the official Bootstrap5 template pack for django-crispy-forms.
+
+## Publishing changes to Gemfury
+
+Each time changes are made to this package, you must re-publish it to Gemfury. To get setup for publishing, follow these steps:
+
+1. Spin up your virtual environment and run `pip install flit`
+2. [Set up the prerequisites for publishing to Gemfury](https://github.com/muckrack/cli#prerequisites).
+
+Now, you can commit your changes to the repo. To publish these changes to Gemfury, do the following:
+
+1. Increase the version number in `crispy_bootstrap5/__init__.py`
+2. Publish to Gemfury using `make publish`
 
 ## Installation
 
@@ -34,7 +46,7 @@ Bootstrap 5 introduces [floating labels](https://getbootstrap.com/docs/5.0/forms
 This template pack include a layout object to use this input type::
 
     from crispy_bootstrap5.bootstrap5 import FloatingField
-    
+
     # then in your Layout
     ... Layout(
         FloatingField("first_name"),
