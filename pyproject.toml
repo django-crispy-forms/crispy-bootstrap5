@@ -1,0 +1,45 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "crispy_bootstrap5"
+dist-name = "muckrack-crispy-bootstrap5"
+description-file = "README.md"
+author = "David Smith"
+home-page = "https://github.com/django-crispy-forms/crispy-bootstrap5"
+requires = [
+    "django-crispy-forms>=1.13.0",
+    "django>=2.2"
+]
+
+[tool.flit.metadata.requires-extra]
+test = [
+    "pytest",
+    "pytest-django",
+    "crispy-bootstrap5[test]"
+]
+dev = [
+    "black",
+    "pre-commit"
+]
+
+[tool.black]
+fast = true
+line-length = 119
+skip-string-normalization = true
+skip-numeric-underscore-normalization = true
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | venv
+)/
+'''
