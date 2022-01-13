@@ -643,7 +643,7 @@ def test_flat_attrs_safe():
     assert parse_form(form) == parse_expected("flat_attrs.html")
 
 
-def test_help_text_escape():
+def test_help_text_no_escape():
     form = HelpTextForm()
     form.helper = FormHelper()
     form.helper.form_tag = False
