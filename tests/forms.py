@@ -291,5 +291,5 @@ class HelpTextForm(forms.Form):
         label="email",
         required=True,
         widget=forms.TextInput(),
-        help_text="Insert your email<>&",
+        help_text="Insert your <b>email</b>",
     )
