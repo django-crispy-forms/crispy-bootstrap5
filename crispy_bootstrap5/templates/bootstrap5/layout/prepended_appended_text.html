@@ -15,7 +15,7 @@
             <div class="input-group{% if input_size %} {{ input_size }}{% endif %}">
                 {# prepend #}
                 {% if crispy_prepended_text %}
-                    <span class="input-group-text">{{ crispy_prepended_text }}</span>
+                    <span class="input-group-text">{{ crispy_prepended_text|safe }}</span>
                 {% endif %}
 
                 {# input #}
@@ -33,7 +33,7 @@
                 
                 {# append #}
                 {% if crispy_appended_text %}
-                    <span class="input-group-text">{{ crispy_appended_text }}</span>
+                    <span class="input-group-text">{{ crispy_appended_text|safe }}</span>
                 {% endif %}
                 {% if error_text_inline %}
                     {% include 'bootstrap5/layout/field_errors.html' %}
