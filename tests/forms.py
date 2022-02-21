@@ -1,3 +1,4 @@
+from urllib import request
 from crispy_forms.helper import FormHelper
 from django import forms
 from django.db import models
@@ -218,7 +219,7 @@ class FileFormRequired(forms.Form):
 
 
 class InputsForm(forms.Form):
-    choices = ((1, "Option one"), (2, "Option two"), (3, "Option three"))
+    choices = ((1, "Option one"), (2, "Option two"), (3, "Option three"), ("", "Option 4"))
     text_input = forms.CharField()
     text_area = forms.CharField(widget=forms.Textarea())
     checkboxes = forms.MultipleChoiceField(
@@ -230,7 +231,7 @@ class InputsForm(forms.Form):
     single_checkbox = forms.CharField(
         label="company", required=False, widget=forms.CheckboxInput()
     )
-    select_input = forms.ChoiceField(choices=choices)
+    select_input = forms.ChoiceField(choices=choices, required=False)
 
 
 class LabelForm(forms.Form):

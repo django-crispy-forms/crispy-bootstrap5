@@ -534,7 +534,7 @@ def test_bootstrap5_form_inline():
 
 
 def test_select():
-    form = InputsForm()
+    form = InputsForm({'select_input': ''})
     form.helper = FormHelper()
     form.helper.layout = Layout("select_input")
     assert parse_form(form) == parse_expected("test_select.html")
