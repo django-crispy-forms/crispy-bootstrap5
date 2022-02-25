@@ -8,7 +8,7 @@ Bootstrap5 template pack for django-crispy-forms
 
 Install this plugin using `pip`:
 
-    $ pip install crispy-bootstrap5
+    pip install crispy-bootstrap5
 
 ## Usage
 
