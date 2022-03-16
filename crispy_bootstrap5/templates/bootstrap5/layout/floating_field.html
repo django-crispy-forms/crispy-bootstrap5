@@ -20,7 +20,7 @@
     {% endif %} 
     
     <label {% if field.id_for_label %}for="{{ field.id_for_label }}"{% endif %}{% if label_class %} class="{{ label_class }}"{% endif %}>
-        {{ field.label }}
+        {{ field.label }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
     </label>
 
     {% include 'bootstrap5/layout/help_text_and_errors.html' %}
