@@ -1,6 +1,5 @@
 {% load crispy_forms_field %}
 
-<div class="{{ field_class }} mb-2">
 {% for widget in field.subwidgets %}
 {% if widget.data.is_initial %}
 <div class="input-group mb-2">
@@ -25,4 +24,3 @@
     {% include 'bootstrap5/layout/help_text_and_errors.html' %}
 </div>
 {% endfor %}
-</div>
