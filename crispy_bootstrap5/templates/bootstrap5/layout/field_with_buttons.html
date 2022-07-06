@@ -7,7 +7,7 @@
         </label>
     {% endif %}
 
-    <div{% if field_class %}class="{{ field_class }}"{% endif %}>
+    <div{% if field_class %} class="{{ field_class }}"{% endif %}>
         <div class="input-group{% if input_size %} {{ input_size }}{% endif %}">
             {% if field.errors %}
                 {% crispy_field field 'class' 'form-control is-invalid' %}
