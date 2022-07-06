@@ -556,7 +556,7 @@ def test_error_and_help_inline():
 
     # Check that error goes before help, otherwise CSS won't work
     error_position = html.find('<span id="error_1_id_email" class="help-inline">')
-    help_position = html.find('<small id="hint_id_email" class="form-text text-muted">')
+    help_position = html.find('<small id="hint_id_email" class="form-text">')
     assert error_position < help_position
 
 
