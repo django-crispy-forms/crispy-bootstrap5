@@ -1,7 +1,9 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
-## Next Release(tbc)
+## 0.7 (2022-09-28)
 * Added Django 4.1 support
+
+See [Milestones](https://github.com/django-crispy-forms/crispy-bootstrap5/milestones?state=closed) for for change list.
 
 ## 0.6 (2021-09-28)
 * Added Django 4.0 support
