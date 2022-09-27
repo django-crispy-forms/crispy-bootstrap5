@@ -281,7 +281,9 @@ class GroupedChoiceForm(forms.Form):
         ("unknown", "Unknown"),
     ]
     checkbox_select_multiple = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple, choices=choices
+        widget=forms.CheckboxSelectMultiple,
+        choices=choices,
+        help_text="help",
     )
     radio = forms.MultipleChoiceField(widget=forms.RadioSelect, choices=choices)
 
