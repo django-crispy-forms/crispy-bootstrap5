@@ -21,6 +21,7 @@ from crispy_forms.layout import HTML, Field, Layout, MultiWidgetField
 from crispy_forms.utils import render_crispy_form
 from django import forms
 from django.template import Context, Template
+from django.test import override_settings
 from django.utils.translation import activate, deactivate
 from django.utils.translation import gettext as _
 
@@ -36,6 +37,12 @@ from .forms import (
     SampleFormCustomWidgets,
 )
 from .utils import parse_expected, parse_form
+
+CONVERTERS = {
+    "textinput": "inputtext textinput textInput",
+    "fileinput": "fileinput fileUpload",
+    "passwordinput": "textinput textInput",
+}
 
 
 def test_field_with_custom_template():
@@ -202,6 +209,7 @@ class TestBootstrapLayoutObjects:
         html = render_crispy_form(form)
         assert 'class="form-check-input"' in html
 
+    @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
     def test_prepended_appended_text(self):
         test_form = SampleForm()
         test_form.helper = FormHelper()
@@ -223,6 +231,7 @@ class TestBootstrapLayoutObjects:
         html = render_crispy_form(test_form)
         assert html.count('form-check-inline"') == 2
 
+    @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
     def test_accordion_and_accordiongroup(self):
         random.seed(0)
         form = SampleForm()
@@ -269,6 +278,7 @@ class TestBootstrapLayoutObjects:
             == 0
         )
 
+    @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
     def test_bs5accordion(self):
         random.seed(0)
         form = SampleForm()
@@ -315,6 +325,7 @@ class TestBootstrapLayoutObjects:
             == 0
         )
 
+    @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
     def test_bs5accordion_flush(self):
         random.seed(0)
         test_form = SampleForm()
@@ -329,6 +340,7 @@ class TestBootstrapLayoutObjects:
         )
         assert parse_form(test_form) == parse_expected("accordion_flush.html")
 
+    @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
     def test_bs5accordion_always_open(self):
         random.seed(0)
         test_form = SampleForm()

@@ -16,6 +16,7 @@ from django.forms.models import formset_factory, modelformset_factory
 from django.middleware.csrf import _get_new_csrf_string
 from django.shortcuts import render
 from django.template import Context, Template
+from django.test import override_settings
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -35,6 +36,12 @@ from .forms import (
     SampleForm6,
 )
 from .utils import contains_partial, parse_expected, parse_form
+
+CONVERTERS = {
+    "textinput": "inputtext textinput textInput",
+    "fileinput": "fileinput fileUpload",
+    "passwordinput": "textinput textInput",
+}
 
 
 def test_invalid_unicode_characters(settings):
@@ -331,6 +338,7 @@ def test_bs5_field_with_buttons_css_classes():
     assert parse_form(form) == parse_expected("field_with_buttons_failing.html")
 
 
+@override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
 def test_formset_layout():
     SampleFormSet = formset_factory(SampleForm, extra=3)
     formset = SampleFormSet()
@@ -523,6 +531,7 @@ def test_keepcontext_context_manager():
     assert response.content.count(b"form-check-input") > 0
 
 
+@override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
 def test_bootstrap5_form_inline():
     form = SampleForm()
     form.helper = FormHelper()
@@ -557,7 +566,7 @@ def test_update_attributes_class():
     form.helper.layout = Layout("email", Field("password1"), "password2")
     form.helper["password1"].update_attributes(css_class="hello")
     html = render_crispy_form(form)
-    assert html.count(' class="hello textinput') == 1
+    assert html.count(' class="hello') == 1
     form.helper = FormHelper()
     form.helper.layout = Layout(
         "email",
@@ -566,7 +575,7 @@ def test_update_attributes_class():
     )
     form.helper["password1"].update_attributes(css_class="hello2")
     html = render_crispy_form(form)
-    assert html.count(' class="hello hello2 textinput') == 1
+    assert html.count(' class="hello hello2') == 1
 
 
 def test_file_field():
@@ -611,6 +620,7 @@ def test_html_label_escape():
     assert "&lt;&gt;&amp;" in html
 
 
+@override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
 def test_tabular_formset_layout():
     SampleFormSet = formset_factory(SampleForm, extra=3)
     formset = SampleFormSet()
