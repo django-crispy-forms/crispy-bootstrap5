@@ -295,3 +295,14 @@ class HelpTextForm(forms.Form):
         widget=forms.TextInput(),
         help_text="Insert your <b>email</b>",
     )
+
+
+class MediaWidget(forms.widgets.CheckboxInput):
+    class Media:
+        css = {"all": ("test.css",)}
+        js = ("test.js",)
+
+
+class SampleFormWithWidgetMedia(forms.Form):
+    template_name = "form.html"
+    media = forms.CharField(widget=MediaWidget)

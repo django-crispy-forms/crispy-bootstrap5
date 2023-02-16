@@ -34,6 +34,8 @@ from .forms import (
     SampleForm3,
     SampleForm4,
     SampleForm6,
+    SampleFormWithMedia,
+    SampleFormWithWidgetMedia,
 )
 from .utils import contains_partial, parse_expected, parse_form
 
@@ -658,3 +660,17 @@ def test_help_text_no_escape():
     form.helper = FormHelper()
     form.helper.form_tag = False
     assert parse_form(form) == parse_expected("help_text_escape.html")
+
+
+def test_widget_media_is_included_by_default_with_bootstrap4():
+    form = SampleFormWithMedia()
+    form.helper = FormHelper()
+    html = render_crispy_form(form)
+    assert "test.css" in html
+    assert "test.js" in html
+
+    form = SampleFormWithWidgetMedia()
+    form.helper = FormHelper()
+    html = render_crispy_form(form)
+    assert "test.css" in html
+    assert "test.js" in html
