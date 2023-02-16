@@ -304,5 +304,4 @@ class MediaWidget(forms.widgets.CheckboxInput):
 
 
 class SampleFormWithWidgetMedia(forms.Form):
-    template_name = "form.html"
-    media = forms.CharField(widget=MediaWidget)
+    text_field = forms.CharField(widget=MediaWidget)
