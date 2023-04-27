@@ -8,6 +8,7 @@ from crispy_forms.bootstrap import (
     Alert,
     AppendedText,
     FieldWithButtons,
+    FormActions,
     InlineCheckboxes,
     InlineField,
     InlineRadios,
@@ -200,7 +201,6 @@ class TestBootstrapLayoutObjects:
         form.helper.layout = Layout("inline_radios")
 
         html = render_crispy_form(form)
-        print(html)
         assert 'class="form-check-input"' in html
 
         # Make sure an inherited CheckboxSelectMultiple gets rendered as it
@@ -662,3 +662,46 @@ class TestBootstrapLayoutObjects:
         form.helper = FormHelper()
         form.helper.layout = InlineRadios("checkboxes")
         assert parse_form(form) == parse_expected("inline_checkboxes.html")
+
+    def test_formactions(self):
+        test_form = SampleForm()
+        test_form.helper = FormHelper()
+        test_form.helper.form_tag = False
+        test_form.helper.layout = Layout(
+            FormActions(
+                HTML("<b>test</b>"),
+            ),
+        )
+
+        assert 'class="mb-3  "' in render_crispy_form(test_form)
+
+    def test_formactions_attrs(self):
+        test_form = SampleForm()
+        test_form.helper = FormHelper()
+        test_form.helper.form_tag = False
+        test_form.helper.field_class = "field-class"
+        test_form.helper.layout = Layout(
+            FormActions(
+                HTML("<b>test</b>"),
+                css_class="formactions-test-class",
+                css_id="formactions-test-id",
+                test="formactions-test",
+            ),
+        )
+
+        assert parse_form(test_form) == parse_expected("test_formactions.html")
+
+    def test_formactions_horizontal_form(self):
+        test_form = SampleForm()
+        test_form.helper = FormHelper()
+        test_form.helper.form_tag = False
+        test_form.helper.form_class = 'form-horizontal'
+        test_form.helper.layout = Layout(
+            FormActions(
+                HTML("<b>test</b>"),
+                css_class="formactions-test-class",
+            ),
+        )
+
+        expected_class = 'class="mb-3 row formactions-test-class "'
+        assert expected_class in render_crispy_form(test_form)
