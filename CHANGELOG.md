@@ -2,7 +2,8 @@
 
 ## Next Release (TBC)
 * Added Django 4.2 support
-* Added Pthon 3.11 support
+* Added Python 3.11 support
+* Dropped Python 3.7 support
 
 ## 0.7 (2022-09-28)
 * Added Django 4.1 support

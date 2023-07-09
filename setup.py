@@ -33,7 +33,7 @@ setup(
     install_requires=["django-crispy-forms>=1.13.0", "django>=3.2"],
     extras_require={"test": ["pytest", "pytest-django"]},
     tests_require=["crispy-bootstrap5[test]"],
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     include_package_data=True,
     classifiers=[
         "Environment :: Web Environment",
@@ -45,7 +45,6 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
