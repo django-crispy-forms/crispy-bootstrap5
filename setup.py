@@ -30,7 +30,7 @@ setup(
     license="MIT",
     version=VERSION,
     packages=["crispy_bootstrap5"],
-    install_requires=["django-crispy-forms>=1.13.0", "django>=3.2"],
+    install_requires=["django-crispy-forms>=2.0", "django>=3.2"],
     extras_require={"test": ["pytest", "pytest-django"]},
     tests_require=["crispy-bootstrap5[test]"],
     python_requires=">=3.8",
