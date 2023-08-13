@@ -576,12 +576,13 @@ class TestBootstrapLayoutObjects:
             ),
         )
 
-        assert 'class="mb-3 "' in render_crispy_form(test_form)
+        assert 'class="mb-3  "' in render_crispy_form(test_form)
 
     def test_formactions_attrs(self):
         test_form = SampleForm()
         test_form.helper = FormHelper()
         test_form.helper.form_tag = False
+        test_form.helper.field_class = "field-class"
         test_form.helper.layout = Layout(
             FormActions(
                 HTML("<b>test</b>"),
@@ -605,5 +606,5 @@ class TestBootstrapLayoutObjects:
             ),
         )
 
-        expected_class = 'class="mb-3 row formactions-test-class"'
+        expected_class = 'class="mb-3 row formactions-test-class "'
         assert expected_class in render_crispy_form(test_form)
