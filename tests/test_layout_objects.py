@@ -10,6 +10,7 @@ from crispy_forms.bootstrap import (
     InlineCheckboxes,
     InlineField,
     InlineRadios,
+    Modal,
     PrependedAppendedText,
     PrependedText,
     StrictButton,
@@ -564,4 +565,19 @@ class TestBootstrapLayoutObjects:
             "test_grouped_checkboxes_failing.html"
         )
         form.helper.layout = Layout("radio")
-        assert parse_form(form) == parse_expected("test_grouped_radios_failing.html")
+        assert parse_form(form) == parse_expected(
+            "test_grouped_radios_failing.html")
+
+    def test_modal(self):
+        test_form = SampleForm()
+        test_form.helper = FormHelper()
+        test_form.helper.form_tag = False
+        test_form.helper.layout = Layout(
+            Modal(
+                'field1',
+                css_id="modal-id-ex",
+                css_class="modal-class-ex",
+                title="This is my modal",
+            )
+        )
+        assert parse_form(test_form) == parse_expected("modal.html")
