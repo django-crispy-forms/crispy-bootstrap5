@@ -1,10 +1,10 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
 ## Next Release (TBC)
-* Added Django 4.2 support
-* Added Python 3.11 support
+* Added Django 5.0 and 4.2 support
+* Added Python 3.11 and 3.12 support
 * Dropped Python 3.7 support
-* Dropped Django 4.0 support
+* Dropped Django 3.2, 4.0 and 4.1 support
 
 ## 0.7 (2022-09-28)
 * Added Django 4.1 support
