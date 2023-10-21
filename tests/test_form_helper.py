@@ -541,7 +541,7 @@ def test_error_and_help_inline():
     html = render_crispy_form(form)
 
     # Check that help goes before error, otherwise CSS won't work
-    help_position = html.find('<span id="hint_id_email" class="help-inline">')
+    help_position = html.find('<span id="id_email_helptext" class="help-inline">')
     error_position = html.find('<p id="error_1_id_email" class="invalid-feedback">')
     assert help_position < error_position
 
@@ -556,7 +556,7 @@ def test_error_and_help_inline():
 
     # Check that error goes before help, otherwise CSS won't work
     error_position = html.find('<span id="error_1_id_email" class="help-inline">')
-    help_position = html.find('<div id="hint_id_email" class="form-text">')
+    help_position = html.find('<div id="id_email_helptext" class="form-text">')
     assert error_position < help_position
 
 

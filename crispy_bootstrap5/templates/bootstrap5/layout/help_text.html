@@ -1,7 +1,7 @@
 {% if field.help_text %}
     {% if help_text_inline %}
-        <span id="hint_{{ field.auto_id }}" class="form-text">{{ field.help_text|safe}}</span>
+        <span id="{{ field.id_for_label }}_helptext" class="form-text">{{ field.help_text|safe}}</span>
     {% else %}
-        <div id="hint_{{ field.auto_id }}" class="form-text">{{ field.help_text|safe }}</div>
+        <div {% if field.id_for_label %}id="{{ field.id_for_label }}_helptext" {% endif %}class="form-text">{{ field.help_text|safe }}</div>
     {% endif %}
 {% endif %}
