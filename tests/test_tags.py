@@ -150,7 +150,7 @@ def test_crispy_filter_with_form():
 
     assert "<td>" not in html
     assert "id_is_company" in html
-    assert html.count("<label") == 7
+    assert html.count("<label") == 6
 
 
 def test_crispy_filter_with_formset():

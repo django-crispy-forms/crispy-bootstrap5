@@ -11,9 +11,11 @@
     {% endif %}
     <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="{% if field|is_checkbox and form_show_labels %}form-check{% else %}mb-3{% if 'form-horizontal' in form_class %} row{% endif %}{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
         {% if field.label and not field|is_checkbox and form_show_labels %}
-            <label {% if field.id_for_label %}for="{{ field.id_for_label }}"{% endif %} class="{% if 'form-horizontal' in form_class %}col-form-label{% else %}form-label{% endif %}{% if label_class %} {{ label_class }}{% endif %}{% if field.field.required %} requiredField{% endif %}">
+            {% if field.use_fieldset %}<fieldset{% if 'form-horizontal' in form_class %} class="row"{% endif %}>{% endif %}
+            <{% if field.use_fieldset %}legend{% else %}label{% endif %}
+                {% if field.id_for_label %}for="{{ field.id_for_label }}"{% endif %} class="{% if 'form-horizontal' in form_class %}col-form-label pt-0{% else %}form-label{% endif %}{% if label_class %} {{ label_class }}{% endif %}{% if field.field.required %} requiredField{% endif %}">
                 {{ field.label }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
-            </label>
+            </{% if field.use_fieldset %}legend{% else %}label{% endif %}>
         {% endif %}
 
         {% if field|is_checkboxselectmultiple or field|is_radioselect %}
@@ -58,6 +60,7 @@
                 {% if field_class %}</div>{% endif %}
             {% endif %}
         {% endif %}
+        {% if field.use_fieldset and field.label and form_show_labels %}</fieldset>{% endif %}
     </{% if tag %}{{ tag }}{% else %}div{% endif %}>
     {% if field|is_checkbox and tag != "td" %}
         {% if label_class %}

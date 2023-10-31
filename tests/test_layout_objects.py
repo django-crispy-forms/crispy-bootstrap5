@@ -636,3 +636,9 @@ class TestBootstrapLayoutObjects:
             )
         )
         assert parse_form(test_form) == parse_expected("modal.html")
+
+    def test_inline_checkboxes(self):
+        form = CheckboxesSampleForm()
+        form.helper = FormHelper()
+        form.helper.layout = InlineRadios("checkboxes")
+        assert parse_form(form) == parse_expected("inline_checkboxes.html")
