@@ -1,5 +1,6 @@
 import random
 
+import django
 import pytest
 from crispy_forms.bootstrap import (
     Accordion,
@@ -220,9 +221,11 @@ class TestBootstrapLayoutObjects:
             AppendedText("password1", "#"),
             PrependedText("password2", "$"),
         )
-        assert parse_form(test_form) == parse_expected(
-            "test_prepended_appended_text.html"
-        )
+        if django.VERSION < (5, 0):
+            expected = "test_prepended_appended_text_lt50.html"
+        else:
+            expected = "test_prepended_appended_text.html"
+        assert parse_form(test_form) == parse_expected(expected)
 
     def test_inline_radios(self):
         test_form = CheckboxesSampleForm()
@@ -547,7 +550,11 @@ class TestBootstrapLayoutObjects:
             FloatingField("text_area"),
             FloatingField("select_input"),
         )
-        assert parse_form(form) == parse_expected("test_floating_field_failing.html")
+        if django.VERSION < (5, 0):
+            expected = "test_floating_field_failing_lt50.html"
+        else:
+            expected = "test_floating_field_failing.html"
+        assert parse_form(form) == parse_expected(expected)
 
     def test_grouped_checkboxes_radios(self):
         form = GroupedChoiceForm()
@@ -560,11 +567,18 @@ class TestBootstrapLayoutObjects:
         form = GroupedChoiceForm({})
         form.helper = FormHelper()
         form.helper.layout = Layout("checkbox_select_multiple")
-        assert parse_form(form) == parse_expected(
-            "test_grouped_checkboxes_failing.html"
-        )
+        if django.VERSION < (5, 0):
+            expected = "test_grouped_checkboxes_failing_lt50.html"
+        else:
+            expected = "test_grouped_checkboxes_failing.html"
+        assert parse_form(form) == parse_expected(expected)
+
         form.helper.layout = Layout("radio")
-        assert parse_form(form) == parse_expected("test_grouped_radios_failing.html")
+        if django.VERSION < (5, 0):
+            expected = "test_grouped_radios_failing_lt50.html"
+        else:
+            expected = "test_grouped_radios_failing.html"
+        assert parse_form(form) == parse_expected(expected)
 
     def test_formactions(self):
         test_form = SampleForm()
