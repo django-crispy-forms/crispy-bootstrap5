@@ -21,7 +21,7 @@
 </div>
 {% if field.errors and inline_class %}
     {% for error in field.errors %}
-        <p id="error_{{ forloop.counter }}_{{ field.auto_id }}" class="text-danger mb-0"><small><strong>{{ error }}</strong></small></p>
+        <p id="error_{{ forloop.counter }}_{{ field.auto_id }}" class="invalid-feedback"><strong>{{ error }}</strong></p>
     {% endfor %}
 {% endif %}
 {% include 'bootstrap5/layout/help_text.html' %}
