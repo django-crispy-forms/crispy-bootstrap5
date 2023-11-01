@@ -228,11 +228,36 @@ class TestBootstrapLayoutObjects:
         assert parse_form(test_form) == parse_expected(expected)
 
     def test_inline_radios(self):
-        test_form = CheckboxesSampleForm()
-        test_form.helper = FormHelper()
-        test_form.helper.layout = Layout(InlineRadios("inline_radios"))
-        html = render_crispy_form(test_form)
-        assert html.count('form-check-inline"') == 2
+        form = CheckboxesSampleForm()
+        form.helper = FormHelper()
+        form.helper.layout = Layout(InlineRadios("inline_radios"))
+        assert parse_form(form) == parse_expected("inline_radios.html")
+
+    def test_inline_checkboxes(self):
+        form = CheckboxesSampleForm()
+        form.helper = FormHelper()
+        form.helper.layout = InlineRadios("checkboxes")
+        assert parse_form(form) == parse_expected("inline_checkboxes.html")
+
+    def test_inline_radios_failing(self):
+        form = CheckboxesSampleForm({})
+        form.helper = FormHelper()
+        form.helper.layout = Layout(InlineRadios("inline_radios"))
+        if django.VERSION < (5, 0):
+            expected = "inline_radios_failing_lt50.html"
+        else:
+            expected = "inline_radios_failing.html"
+        assert parse_form(form) == parse_expected(expected)
+
+    def test_inline_checkboxes_failing(self):
+        form = CheckboxesSampleForm({})
+        form.helper = FormHelper()
+        form.helper.layout = InlineRadios("checkboxes")
+        if django.VERSION < (5, 0):
+            expected = "inline_checkboxes_failing_lt50.html"
+        else:
+            expected = "inline_checkboxes_failing.html"
+        assert parse_form(form) == parse_expected(expected)
 
     @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
     def test_accordion_and_accordiongroup(self):
