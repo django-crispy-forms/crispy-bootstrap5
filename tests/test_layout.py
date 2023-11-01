@@ -688,3 +688,19 @@ def test_help_text_no_escape():
     else:
         expected = "help_text_escape.html"
     assert parse_form(form) == parse_expected(expected)
+
+
+def test_tag_context():
+    SampleFormSet = formset_factory(SampleForm, extra=3)
+    formset = SampleFormSet()
+    formset.helper = FormHelper()
+    context = {
+        "form": formset,
+        "tag": "User defined tag in context",
+    }
+
+    response = render(
+        request=None, template_name="crispy_render_template.html", context=context
+    )
+
+    assert response.content.count(b"User defined tag in context") == 0

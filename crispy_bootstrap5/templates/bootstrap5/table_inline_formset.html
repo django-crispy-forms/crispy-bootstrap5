@@ -33,7 +33,7 @@
         <tbody>
             <tr class="d-none empty-form">
                 {% for field in formset.empty_form %}
-                    {% include 'bootstrap5/field.html' with tag="td" form_show_labels=False %}
+                    {% include 'bootstrap5/field.html' with crispy_tag="td" form_show_labels=False %}
                 {% endfor %}
             </tr>
 
@@ -44,7 +44,7 @@
 
                 <tr>
                     {% for field in form %}
-                        {% include 'bootstrap5/field.html' with tag="td" form_show_labels=False %}
+                        {% include 'bootstrap5/field.html' with crispy_tag="td" form_show_labels=False %}
                     {% endfor %}
                 </tr>
             {% endfor %}
