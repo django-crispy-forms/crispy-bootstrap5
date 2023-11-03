@@ -35,6 +35,7 @@ from .forms import (
     SampleForm3,
     SampleForm4,
     SampleForm6,
+    SelectForm,
 )
 from .utils import contains_partial, parse_expected, parse_form
 
@@ -344,6 +345,12 @@ def test_bs5_field_with_buttons_css_classes():
     else:
         expected = "field_with_buttons_failing.html"
     assert parse_form(form) == parse_expected(expected)
+
+
+def test_field_with_buttons_select():
+    form = SelectForm()
+    form.helper = FormHelper()
+    assert parse_form(form) == parse_expected("field_with_buttons_select.html")
 
 
 @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)

@@ -9,10 +9,18 @@
 
     <div{% if field_class %} class="{{ field_class }}"{% endif %}>
         <div class="input-group{% if input_size %} {{ input_size }}{% endif %}">
-            {% if field.errors %}
-                {% crispy_field field 'class' 'form-control is-invalid' %}
+            {% if field|is_select %}
+                {% if field.errors %}
+                    {% crispy_field field 'class' 'form-select is-invalid' %}
+                {% else %}
+                    {% crispy_field field 'class' 'form-select' %}
+                {% endif %}
             {% else %}
-                {% crispy_field field 'class' 'form-control' %}
+                {% if field.errors %}
+                    {% crispy_field field 'class' 'form-control is-invalid' %}
+                {% else %}
+                    {% crispy_field field 'class' 'form-control' %}
+                {% endif %}
             {% endif %}
             {{ buttons|safe }}
         </div>
