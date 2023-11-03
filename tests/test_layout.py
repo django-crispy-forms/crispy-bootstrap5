@@ -415,7 +415,10 @@ def test_formset_layout():
     assert html.count("Note for first form only") == 1
     assert html.count("row") == 3
 
-    assert html.count("mb-3") == 21
+    # There should be one div with mb-3 per field blocks
+    # There are 6 fields blocks in each (3) form of the formset:
+    #   is_company, email, password1, password2, first_name, last_name
+    assert html.count("mb-3") == 18
 
 
 def test_modelformset_layout():
