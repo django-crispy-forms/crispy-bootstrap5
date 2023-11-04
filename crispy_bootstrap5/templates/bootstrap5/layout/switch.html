@@ -1,0 +1,17 @@
+{% load crispy_forms_field %}
+
+{% if field.is_hidden %}
+    {{ field }}
+{% else %}
+    <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="mb-3 form-check form-switch{% if 'form-horizontal' in form_class %} row{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
+            {% if field.errors %}
+                {% crispy_field field 'class' 'form-check-input is-invalid' 'role' 'checkbox' %}
+            {% else %}
+                {% crispy_field field 'class' 'form-check-input' 'role' 'checkbox' %}
+            {% endif %}
+            <label for="{{ field.id_for_label }}" class="form-check-label{% if field.field.required %} requiredField{% endif %}">
+                {{ field.label }}
+            </label>
+            {% include 'bootstrap5/layout/help_text_and_errors.html' %}
+    </{% if tag %}{{ tag }}{% else %}div{% endif %}>
+{% endif %}

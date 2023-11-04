@@ -26,7 +26,7 @@ from django.test import override_settings
 from django.utils.translation import activate, deactivate
 from django.utils.translation import gettext as _
 
-from crispy_bootstrap5.bootstrap5 import BS5Accordion, FloatingField
+from crispy_bootstrap5.bootstrap5 import BS5Accordion, FloatingField, Switch
 
 from .forms import (
     CheckboxesSampleForm,
@@ -604,3 +604,10 @@ class TestBootstrapLayoutObjects:
         else:
             expected = "test_grouped_radios_failing.html"
         assert parse_form(form) == parse_expected(expected)
+
+    def test_switch(self):
+        form = SampleForm()
+        form["is_company"].help_text = "is_company help text"
+        form.helper = FormHelper()
+        form.helper.layout = Layout(Switch("is_company"))
+        assert parse_form(form) == parse_expected("test_switch.html")

@@ -27,3 +27,7 @@ class BS5Accordion(Accordion):
         if self.always_open:
             for accordion_group in self.fields:
                 accordion_group.always_open = True
+
+
+class Switch(Field):
+    template = "bootstrap5/layout/switch.html"
