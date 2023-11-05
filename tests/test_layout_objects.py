@@ -611,3 +611,13 @@ class TestBootstrapLayoutObjects:
         form.helper = FormHelper()
         form.helper.layout = Layout(Switch("is_company"))
         assert parse_form(form) == parse_expected("test_switch.html")
+
+    def test_switch_horizontal(self):
+        form = SampleForm()
+        form["is_company"].help_text = "is_company help text"
+        form.helper = FormHelper()
+        form.helper.label_class = "col-lg-2"
+        form.helper.field_class = "col-lg-8"
+        form.helper.form_class = "form-horizontal"
+        form.helper.layout = Layout(Switch("is_company"), "first_name")
+        assert parse_form(form) == parse_expected("test_switch_horizontal.html")
