@@ -63,6 +63,17 @@ from crispy_bootstrap5.bootstrap5 import BS5Accordion
 )
 ```
 
+Support is added for [Switches](https://getbootstrap.com/docs/5.2/forms/checks-radios/#switches). Switches are a custom 
+checkbox rendered as a toggle switch. The widget for these fields should be
+a [CheckboxInput](https://docs.djangoproject.com/en/4.2/ref/forms/widgets/#django.forms.CheckboxInput).
+
+```python
+from crispy_bootstrap5.bootstrap5 import Switch
+
+... Layout(Switch("is_company"))
+```
+
+
 ## Development
 
 To contribute to this library, first checkout the code. Then create a new virtual environment:

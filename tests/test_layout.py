@@ -1,3 +1,4 @@
+import django
 import pytest
 from crispy_forms.bootstrap import (
     AppendedText,
@@ -34,6 +35,7 @@ from .forms import (
     SampleForm3,
     SampleForm4,
     SampleForm6,
+    SelectForm,
 )
 from .utils import contains_partial, parse_expected, parse_form
 
@@ -321,8 +323,11 @@ def test_bs5_field_with_buttons_css_classes():
             ),
         )
     )
-
-    assert parse_form(form) == parse_expected("field_with_buttons.html")
+    if django.VERSION < (5, 0):
+        expected = "field_with_buttons_lt50.html"
+    else:
+        expected = "field_with_buttons.html"
+    assert parse_form(form) == parse_expected(expected)
 
     form = SampleForm3({})
     form.helper = FormHelper()
@@ -335,7 +340,17 @@ def test_bs5_field_with_buttons_css_classes():
             ),
         )
     )
-    assert parse_form(form) == parse_expected("field_with_buttons_failing.html")
+    if django.VERSION < (5, 0):
+        expected = "field_with_buttons_failing_lt50.html"
+    else:
+        expected = "field_with_buttons_failing.html"
+    assert parse_form(form) == parse_expected(expected)
+
+
+def test_field_with_buttons_select():
+    form = SelectForm()
+    form.helper = FormHelper()
+    assert parse_form(form) == parse_expected("field_with_buttons_select.html")
 
 
 @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
@@ -400,7 +415,10 @@ def test_formset_layout():
     assert html.count("Note for first form only") == 1
     assert html.count("row") == 3
 
-    assert html.count("mb-3") == 21
+    # There should be one div with mb-3 per field blocks
+    # There are 6 fields blocks in each (3) form of the formset:
+    #   is_company, email, password1, password2, first_name, last_name
+    assert html.count("mb-3") == 18
 
 
 def test_modelformset_layout():
@@ -539,7 +557,11 @@ def test_bootstrap5_form_inline():
     form.helper.field_template = "bootstrap5/layout/inline_field.html"
     form.helper.layout = Layout("email", "password1", "last_name")
     form.helper.form_class = "row row-cols-lg-auto"
-    assert parse_form(form) == parse_expected("test_bootstrap5_form_inline.html")
+    if django.VERSION < (5, 0):
+        expected = "test_bootstrap5_form_inline_lt50.html"
+    else:
+        expected = "test_bootstrap5_form_inline.html"
+    assert parse_form(form) == parse_expected(expected)
 
 
 def test_select():
@@ -593,11 +615,19 @@ def test_file_field():
     form.helper = FormHelper()
     form.helper.layout = Layout("clearable_file")
 
-    assert parse_form(form) == parse_expected("test_clearable_file_field_failing.html")
+    if django.VERSION < (5, 0):
+        expected = "test_clearable_file_field_failing_lt50.html"
+    else:
+        expected = "test_clearable_file_field_failing.html"
+    assert parse_form(form) == parse_expected(expected)
 
     form.helper.layout = Layout("file_field")
 
-    assert parse_form(form) == parse_expected("test_file_field_failing.html")
+    if django.VERSION < (5, 0):
+        expected = "test_file_field_failing_lt50.html"
+    else:
+        expected = "test_file_field_failing.html"
+    assert parse_form(form) == parse_expected(expected)
 
 
 def test_row():
@@ -626,7 +656,11 @@ def test_tabular_formset_layout():
     formset = SampleFormSet()
     formset.helper = FormHelper()
     formset.helper.template = "bootstrap5/table_inline_formset.html"
-    assert parse_form(formset) == parse_expected("test_tabular_formset_layout.html")
+    if django.VERSION < (5, 0):
+        expected = "test_tabular_formset_layout_lt50.html"
+    else:
+        expected = "test_tabular_formset_layout.html"
+    assert parse_form(formset) == parse_expected(expected)
 
     SampleFormSet = formset_factory(SampleForm, extra=3)
     data = {
@@ -636,9 +670,11 @@ def test_tabular_formset_layout():
     formset = SampleFormSet(data)
     formset.helper = FormHelper()
     formset.helper.template = "bootstrap5/table_inline_formset.html"
-    assert parse_form(formset) == parse_expected(
-        "test_tabular_formset_layout_failing.html"
-    )
+    if django.VERSION < (5, 0):
+        expected = "test_tabular_formset_layout_failing_lt50.html"
+    else:
+        expected = "test_tabular_formset_layout_failing.html"
+    assert parse_form(formset) == parse_expected(expected)
 
 
 def test_flat_attrs_safe():
@@ -657,4 +693,8 @@ def test_help_text_no_escape():
     form = HelpTextForm()
     form.helper = FormHelper()
     form.helper.form_tag = False
-    assert parse_form(form) == parse_expected("help_text_escape.html")
+    if django.VERSION < (5, 0):
+        expected = "help_text_escape_lt50.html"
+    else:
+        expected = "help_text_escape.html"
+    assert parse_form(form) == parse_expected(expected)

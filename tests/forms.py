@@ -295,3 +295,10 @@ class HelpTextForm(forms.Form):
         widget=forms.TextInput(),
         help_text="Insert your <b>email</b>",
     )
+
+
+class SelectForm(forms.Form):
+    fruit = forms.ChoiceField(
+        choices=[("apple", "Apple"), ("pear", "Pear")],
+        widget=forms.Select,
+    )
