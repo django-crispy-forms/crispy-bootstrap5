@@ -600,9 +600,6 @@ class TestBootstrapLayoutObjects:
         assert parse_form(form) == parse_expected(expected)
 
         form.helper.layout = Layout("radio")
-        assert parse_form(form) == parse_expected(
-            "test_grouped_radios_failing.html")
-
         if django.VERSION < (5, 0):
             expected = "test_grouped_radios_failing_lt50.html"
         else:
