@@ -35,6 +35,7 @@ from .forms import (
     SampleForm3,
     SampleForm4,
     SampleForm6,
+    SelectForm,
 )
 from .utils import contains_partial, parse_expected, parse_form
 
@@ -346,6 +347,12 @@ def test_bs5_field_with_buttons_css_classes():
     assert parse_form(form) == parse_expected(expected)
 
 
+def test_field_with_buttons_select():
+    form = SelectForm()
+    form.helper = FormHelper()
+    assert parse_form(form) == parse_expected("field_with_buttons_select.html")
+
+
 @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
 def test_formset_layout():
     SampleFormSet = formset_factory(SampleForm, extra=3)
@@ -408,7 +415,10 @@ def test_formset_layout():
     assert html.count("Note for first form only") == 1
     assert html.count("row") == 3
 
-    assert html.count("mb-3") == 21
+    # There should be one div with mb-3 per field blocks
+    # There are 6 fields blocks in each (3) form of the formset:
+    #   is_company, email, password1, password2, first_name, last_name
+    assert html.count("mb-3") == 18
 
 
 def test_modelformset_layout():

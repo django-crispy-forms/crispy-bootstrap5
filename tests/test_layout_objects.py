@@ -27,7 +27,7 @@ from django.test import override_settings
 from django.utils.translation import activate, deactivate
 from django.utils.translation import gettext as _
 
-from crispy_bootstrap5.bootstrap5 import BS5Accordion, FloatingField
+from crispy_bootstrap5.bootstrap5 import BS5Accordion, FloatingField, Switch
 
 from .forms import (
     CheckboxesSampleForm,
@@ -228,11 +228,36 @@ class TestBootstrapLayoutObjects:
         assert parse_form(test_form) == parse_expected(expected)
 
     def test_inline_radios(self):
-        test_form = CheckboxesSampleForm()
-        test_form.helper = FormHelper()
-        test_form.helper.layout = Layout(InlineRadios("inline_radios"))
-        html = render_crispy_form(test_form)
-        assert html.count('form-check-inline"') == 2
+        form = CheckboxesSampleForm()
+        form.helper = FormHelper()
+        form.helper.layout = Layout(InlineRadios("inline_radios"))
+        assert parse_form(form) == parse_expected("inline_radios.html")
+
+    def test_inline_checkboxes(self):
+        form = CheckboxesSampleForm()
+        form.helper = FormHelper()
+        form.helper.layout = InlineRadios("checkboxes")
+        assert parse_form(form) == parse_expected("inline_checkboxes.html")
+
+    def test_inline_radios_failing(self):
+        form = CheckboxesSampleForm({})
+        form.helper = FormHelper()
+        form.helper.layout = Layout(InlineRadios("inline_radios"))
+        if django.VERSION < (5, 0):
+            expected = "inline_radios_failing_lt50.html"
+        else:
+            expected = "inline_radios_failing.html"
+        assert parse_form(form) == parse_expected(expected)
+
+    def test_inline_checkboxes_failing(self):
+        form = CheckboxesSampleForm({})
+        form.helper = FormHelper()
+        form.helper.layout = InlineRadios("checkboxes")
+        if django.VERSION < (5, 0):
+            expected = "inline_checkboxes_failing_lt50.html"
+        else:
+            expected = "inline_checkboxes_failing.html"
+        assert parse_form(form) == parse_expected(expected)
 
     @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
     def test_accordion_and_accordiongroup(self):
@@ -622,3 +647,20 @@ class TestBootstrapLayoutObjects:
 
         expected_class = 'class="mb-3 row formactions-test-class "'
         assert expected_class in render_crispy_form(test_form)
+        
+    def test_switch(self):
+        form = SampleForm()
+        form["is_company"].help_text = "is_company help text"
+        form.helper = FormHelper()
+        form.helper.layout = Layout(Switch("is_company"))
+        assert parse_form(form) == parse_expected("test_switch.html")
+
+    def test_switch_horizontal(self):
+        form = SampleForm()
+        form["is_company"].help_text = "is_company help text"
+        form.helper = FormHelper()
+        form.helper.label_class = "col-lg-2"
+        form.helper.field_class = "col-lg-8"
+        form.helper.form_class = "form-horizontal"
+        form.helper.layout = Layout(Switch("is_company"), "first_name")
+        assert parse_form(form) == parse_expected("test_switch_horizontal.html")

@@ -1,5 +1,9 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
+## Next Release
+
+* Added support for [Switches](https://getbootstrap.com/docs/5.2/forms/checks-radios/#switches). (#162)
+
 ## 2023.10 (2023-10-2023)
 * Added Django 5.0 and 4.2 support
 * Added Python 3.11 and 3.12 support
