@@ -647,7 +647,7 @@ class TestBootstrapLayoutObjects:
 
         expected_class = 'class="mb-3 row formactions-test-class "'
         assert expected_class in render_crispy_form(test_form)
-        
+
     def test_switch(self):
         form = SampleForm()
         form["is_company"].help_text = "is_company help text"
