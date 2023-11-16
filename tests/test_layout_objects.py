@@ -11,6 +11,7 @@ from crispy_forms.bootstrap import (
     InlineCheckboxes,
     InlineField,
     InlineRadios,
+    Modal,
     PrependedAppendedText,
     PrependedText,
     StrictButton,
@@ -621,3 +622,17 @@ class TestBootstrapLayoutObjects:
         form.helper.form_class = "form-horizontal"
         form.helper.layout = Layout(Switch("is_company"), "first_name")
         assert parse_form(form) == parse_expected("test_switch_horizontal.html")
+
+    def test_modal(self):
+        test_form = SampleForm()
+        test_form.helper = FormHelper()
+        test_form.helper.form_tag = False
+        test_form.helper.layout = Layout(
+            Modal(
+                'field1',
+                css_id="modal-id-ex",
+                css_class="modal-class-ex",
+                title="This is my modal",
+            )
+        )
+        assert parse_form(test_form) == parse_expected("modal.html")

@@ -3,6 +3,7 @@
 ## Next Release
 
 * Added support for [Switches](https://getbootstrap.com/docs/5.2/forms/checks-radios/#switches). (#162)
+* Added modal template
 
 ## 2023.10 (2023-10-2023)
 * Added Django 5.0 and 4.2 support
