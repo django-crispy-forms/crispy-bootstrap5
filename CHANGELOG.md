@@ -1,9 +1,10 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
-## Next Release
+## 2024.2 (2024-02-24)
 
 * Added support for [Switches](https://getbootstrap.com/docs/5.2/forms/checks-radios/#switches). (#162)
-* Added modal template
+* Used `<fieldset>` and `<legend>` to group related inputs.
+* Added modal template.
 
 ## 2023.10 (2023-10-2023)
 * Added Django 5.0 and 4.2 support
