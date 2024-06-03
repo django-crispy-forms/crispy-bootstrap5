@@ -1,5 +1,8 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
+## 2024.3 (TBC)
+* Added support for Django 5.1.
+
 ## 2024.2 (2024-02-24)
 
 * Added support for [Switches](https://getbootstrap.com/docs/5.2/forms/checks-radios/#switches). (#162)
