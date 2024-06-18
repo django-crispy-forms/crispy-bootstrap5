@@ -80,7 +80,7 @@ To contribute to this library, first checkout the code. Then create a new virtua
 
 ```bash
 cd crispy-bootstrap5
-python -mvenv venv
+python -m venv venv
 source venv/bin/activate
 ```
 
