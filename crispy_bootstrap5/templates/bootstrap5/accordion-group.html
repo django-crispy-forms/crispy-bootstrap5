@@ -1,4 +1,4 @@
-<div class="accordion-item">
+<div class="accordion-item{% if div.css_class %} {{div.css_class}}{% endif %}">
     <h2 class="accordion-header">
         <button class="accordion-button{% if not div.active %} collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#{{ div.css_id }}" aria-expanded="true"
             aria-controls="{{ div.css_id }}">
