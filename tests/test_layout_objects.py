@@ -1,5 +1,6 @@
 import random
 
+import crispy_forms
 import django
 import pytest
 from crispy_forms.bootstrap import (
@@ -260,6 +261,7 @@ class TestBootstrapLayoutObjects:
             expected = "inline_checkboxes_failing.html"
         assert parse_form(form) == parse_expected(expected)
 
+    @pytest.mark.xfail(crispy_forms.__version__ <= "2.2", reason="django-crispy-forms issue #1395")
     @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
     def test_accordion_and_accordiongroup(self):
         random.seed(0)
@@ -364,6 +366,7 @@ class TestBootstrapLayoutObjects:
             == 0
         )
 
+    @pytest.mark.xfail(crispy_forms.__version__ <= "2.2", reason="django-crispy-forms issue #1395")
     @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
     def test_bs5accordion(self):
         random.seed(0)
@@ -411,6 +414,7 @@ class TestBootstrapLayoutObjects:
             == 0
         )
 
+    @pytest.mark.xfail(crispy_forms.__version__ <= "2.2", reason="django-crispy-forms issue #1395")
     @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
     def test_bs5accordion_flush(self):
         random.seed(0)
@@ -426,6 +430,7 @@ class TestBootstrapLayoutObjects:
         )
         assert parse_form(test_form) == parse_expected("accordion_flush.html")
 
+    @pytest.mark.xfail(crispy_forms.__version__ <= "2.2", reason="django-crispy-forms issue #1395")
     @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
     def test_bs5accordion_always_open(self):
         random.seed(0)
