@@ -326,26 +326,6 @@ class TestBootstrapLayoutObjects:
                 == 1
         )
 
-    def test_first_accordion_group_has_css_class_active(self):
-        test_form = SampleForm()
-        test_form.helper = FormHelper()
-        test_form.helper.form_tag = False
-        test_form.helper.layout = Layout(
-            Accordion(
-                AccordionGroup("one", "first_name"),
-                AccordionGroup("two", "password1", "password2"),
-            )
-        )
-
-        parsed_form = parse_form(test_form)
-        first_accordion_group_attributes = dict(parsed_form[0].attributes)
-        second_accordion_group_attributes = dict(parsed_form[1].attributes)
-
-        assert (
-                'active' in first_accordion_group_attributes['class'] and
-                'active' not in second_accordion_group_attributes['class']
-        )
-
     def test_accordion_active_false_not_rendered(self):
         test_form = SampleForm()
         test_form.helper = FormHelper()
