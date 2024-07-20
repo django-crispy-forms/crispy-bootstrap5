@@ -25,7 +25,6 @@ from crispy_forms.utils import render_crispy_form
 from django import forms
 from django.template import Context, Template
 from django.test import override_settings
-from django.test.html import parse_html
 from django.utils.translation import activate, deactivate
 from django.utils.translation import gettext as _
 
@@ -262,15 +261,9 @@ class TestBootstrapLayoutObjects:
             expected = "inline_checkboxes_failing.html"
         assert parse_form(form) == parse_expected(expected)
 
-    @pytest.mark.parametrize("keep_compatibility", [
-        True,
-        pytest.param(False, marks=pytest.mark.xfail(
-            condition=crispy_forms.__version__ <= "2.2",
-            reason="django-crispy-forms issue #1395",
-        )),
-    ])
+    @pytest.mark.xfail(crispy_forms.__version__ <= "2.2", reason="django-crispy-forms issue #1395")
     @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
-    def test_accordion_and_accordiongroup(self, keep_compatibility):
+    def test_accordion_and_accordiongroup(self):
         random.seed(0)
         form = SampleForm()
         form.helper = FormHelper()
@@ -281,13 +274,7 @@ class TestBootstrapLayoutObjects:
                 AccordionGroup("two", "password1", "password2"),
             )
         )
-
-        html = render_crispy_form(form)
-        if keep_compatibility:
-            # remove unexpected css_class 'active' from first accordion_group to suppress crispy_forms issue #1395
-            html = html.replace(" active", "", 1)
-
-        assert parse_html(html) == parse_expected("accordion.html")
+        assert parse_form(form) == parse_expected("accordion.html")
 
     def test_accordion_css_class_is_applied(self):
         classes = 'one two three'
@@ -359,15 +346,9 @@ class TestBootstrapLayoutObjects:
             == 0
         )
 
-    @pytest.mark.parametrize("keep_compatibility", [
-        True,
-        pytest.param(False, marks=pytest.mark.xfail(
-            condition=crispy_forms.__version__ <= "2.2",
-            reason="django-crispy-forms issue #1395",
-        )),
-    ])
+    @pytest.mark.xfail(crispy_forms.__version__ <= "2.2", reason="django-crispy-forms issue #1395")
     @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
-    def test_bs5accordion(self, keep_compatibility):
+    def test_bs5accordion(self):
         random.seed(0)
         form = SampleForm()
         form.helper = FormHelper()
@@ -378,13 +359,7 @@ class TestBootstrapLayoutObjects:
                 AccordionGroup("two", "password1", "password2"),
             )
         )
-
-        html = render_crispy_form(form)
-        if keep_compatibility:
-            # remove unexpected css_class 'active' from first accordion_group to suppress crispy_forms issue #1395
-            html = html.replace(" active", "", 1)
-
-        assert parse_html(html) == parse_expected("accordion.html")
+        assert parse_form(form) == parse_expected("accordion.html")
 
     def test_bs5accordion_active_false_not_rendered(self):
         test_form = SampleForm()
@@ -419,15 +394,9 @@ class TestBootstrapLayoutObjects:
             == 0
         )
 
-    @pytest.mark.parametrize("keep_compatibility", [
-        True,
-        pytest.param(False, marks=pytest.mark.xfail(
-            condition=crispy_forms.__version__ <= "2.2",
-            reason="django-crispy-forms issue #1395",
-        )),
-    ])
+    @pytest.mark.xfail(crispy_forms.__version__ <= "2.2", reason="django-crispy-forms issue #1395")
     @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
-    def test_bs5accordion_flush(self, keep_compatibility):
+    def test_bs5accordion_flush(self):
         random.seed(0)
         test_form = SampleForm()
         test_form.helper = FormHelper()
@@ -439,23 +408,11 @@ class TestBootstrapLayoutObjects:
                 flush=True,
             )
         )
+        assert parse_form(test_form) == parse_expected("accordion_flush.html")
 
-        html = render_crispy_form(test_form)
-        if keep_compatibility:
-            # remove unexpected css_class 'active' from first accordion_group to suppress crispy_forms issue #1395
-            html = html.replace(" active", "", 1)
-
-        assert parse_html(html) == parse_expected("accordion_flush.html")
-
-    @pytest.mark.parametrize("keep_compatibility", [
-        True,
-        pytest.param(False, marks=pytest.mark.xfail(
-            condition=crispy_forms.__version__ <= "2.2",
-            reason="django-crispy-forms issue #1395",
-        )),
-    ])
+    @pytest.mark.xfail(crispy_forms.__version__ <= "2.2", reason="django-crispy-forms issue #1395")
     @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
-    def test_bs5accordion_always_open(self, keep_compatibility):
+    def test_bs5accordion_always_open(self):
         random.seed(0)
         test_form = SampleForm()
         test_form.helper = FormHelper()
@@ -467,13 +424,7 @@ class TestBootstrapLayoutObjects:
                 always_open=True,
             )
         )
-
-        html = render_crispy_form(test_form)
-        if keep_compatibility:
-            # remove unexpected css_class 'active' from first accordion_group to suppress crispy_forms issue #1395
-            html = html.replace(" active", "", 1)
-
-        assert parse_html(html) == parse_expected("accordion_always_open.html")
+        assert parse_form(test_form) == parse_expected("accordion_always_open.html")
 
     def test_alert(self):
         test_form = SampleForm()
