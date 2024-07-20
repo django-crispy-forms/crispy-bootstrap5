@@ -34,7 +34,7 @@ dynamic = [
 ]
 dependencies = [
   "django>=4.2",
-  "django-crispy-forms>=2",
+  "django-crispy-forms>=2.3",
 ]
 [project.optional-dependencies]
 test = [
