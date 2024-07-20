@@ -2,6 +2,8 @@
 
 ## 2024.3 (TBC)
 * Added support for Django 5.1.
+* Fixed `accordion.html` and `accordion-group.html` templates to render `css_class` attribute.
+* Dropped support for django-crispy-forms 2.2 and earlier.
 
 ## 2024.2 (2024-02-24)
 
