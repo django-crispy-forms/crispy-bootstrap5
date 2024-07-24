@@ -440,30 +440,13 @@ class TestBootstrapLayoutObjects:
                     "one",
                     "first_name",
                     css_id="custom-name",
-                    css_class="first-tab-class active",
+                    css_class="first-tab-class",
                 ),
                 Tab("two", "password1", "password2"),
+                css_class="tab-holder-class",
             )
         )
-        html = render_crispy_form(test_form)
-
-        assert (
-            html.count(
-                '<ul class="nav nav-tabs"> <li class="nav-item">'
-                '<a class="nav-link active" href="#custom-name" data-bs-toggle="tab">'
-                "One</a></li>"
-            )
-            == 1
-        )
-        assert html.count("tab-pane") == 2
-
-        assert html.count('class="tab-pane first-tab-class active"') == 1
-
-        assert html.count('<div id="custom-name"') == 1
-        assert html.count('<div id="two"') == 1
-        assert html.count('name="first_name"') == 1
-        assert html.count('name="password1"') == 1
-        assert html.count('name="password2"') == 1
+        assert parse_form(test_form) == parse_expected("test_tab_and_tab_holder.html")
 
     def test_tab_helper_reuse(self):
         # this is a proper form, according to the docs.
