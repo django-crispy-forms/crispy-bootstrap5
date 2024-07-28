@@ -215,6 +215,7 @@ class TestBootstrapLayoutObjects:
     def test_prepended_appended_text(self):
         test_form = SampleForm()
         test_form.helper = FormHelper()
+        test_form.helper.label_class = "my-label"
         test_form.helper.layout = Layout(
             PrependedAppendedText(
                 "email", "@<>&", "gmail.com", css_class="form-control-lg"
