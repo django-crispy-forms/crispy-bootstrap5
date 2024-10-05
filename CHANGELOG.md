@@ -1,6 +1,6 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
-## 2024.3 (TBC)
+## 2024.10 (2024-10-05)
 * Added support for Django 5.1.
 * Fixed `accordion.html`, `accordion-group.html` and `tab.html` templates to render `css_class` attribute.
 * Dropped support for django-crispy-forms 2.2 and earlier.
