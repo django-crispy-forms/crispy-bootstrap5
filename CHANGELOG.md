@@ -4,6 +4,7 @@
 * Added support for Django 5.1.
 * Fixed `accordion.html`, `accordion-group.html` and `tab.html` templates to render `css_class` attribute.
 * Dropped support for django-crispy-forms 2.2 and earlier.
+* FormActions template improvements. The template now considers the `css_class` argument and adds the `row` class for Horizontal forms.
 
 ## 2024.2 (2024-02-24)
 
