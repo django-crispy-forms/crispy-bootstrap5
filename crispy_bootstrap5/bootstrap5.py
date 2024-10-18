@@ -31,3 +31,6 @@ class BS5Accordion(Accordion):
 
 class Switch(Field):
     template = "bootstrap5/layout/switch.html"
+
+class Toggle(Field):
+    template = "bootstrap5/layout/toggle.html"
