@@ -1,5 +1,8 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
+## Next Release
+* Added Python 3.13 support. 
+
 ## 2024.10 (2024-10-05)
 * Added support for Django 5.1.
 * Fixed `accordion.html`, `accordion-group.html` and `tab.html` templates to render `css_class` attribute.
