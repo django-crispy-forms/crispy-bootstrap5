@@ -586,6 +586,14 @@ class TestBootstrapLayoutObjects:
         )
         assert parse_form(form) == parse_expected("test_floating_field.html")
 
+        form = SampleForm()
+        form.helper = FormHelper()
+        form.helper.field_class = 'col-lg-8'
+        form.helper.layout = Layout(
+            FloatingField('first_name'),
+        )
+        assert parse_form(form) == parse_expected('test_floating_field_field_label.html')
+
         form = InputsForm({})
         form.helper = FormHelper()
         form.helper.layout = Layout(
