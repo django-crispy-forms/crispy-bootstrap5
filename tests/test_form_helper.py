@@ -1,5 +1,6 @@
 import re
 
+import django
 import pytest
 from crispy_forms.bootstrap import (
     AppendedText,
@@ -120,7 +121,10 @@ def test_form_show_errors_non_field_errors():
     # Ensure those errors were rendered
     assert "<li>Passwords dont match</li>" in html
     assert str(_("This field is required.")) in html
-    assert "error" in html
+    if django.VERSION < (5, 2):
+        assert html.count("error") == 4
+    else:
+        assert html.count("error") == 7
 
     # Now we render without errors
     form.helper.form_show_errors = False
@@ -130,7 +134,10 @@ def test_form_show_errors_non_field_errors():
     # Ensure errors were not rendered
     assert "<li>Passwords dont match</li>" not in html
     assert str(_("This field is required.")) not in html
-    assert "error" not in html
+    if django.VERSION < (5, 2):
+        assert html.count("error") == 0
+    else:
+        assert html.count("error") == 3
 
 
 def test_html5_required():
@@ -487,11 +494,17 @@ def test_bootstrap_form_show_errors_bs5():
 
     form.helper.form_show_errors = True
     html = render_crispy_form(form)
-    assert html.count("error") == 3
+    if django.VERSION < (5, 2):
+        assert html.count("error") == 3
+    else:
+        assert html.count("error") == 6
 
     form.helper.form_show_errors = False
     html = render_crispy_form(form)
-    assert html.count("error") == 0
+    if django.VERSION < (5, 2):
+        assert html.count("error") == 0
+    else:
+        assert html.count("error") == 3
 
 
 def test_error_text_inline():

@@ -342,6 +342,8 @@ def test_bs5_field_with_buttons_css_classes():
     )
     if django.VERSION < (5, 0):
         expected = "field_with_buttons_failing_lt50.html"
+    elif django.VERSION < (5, 2):
+        expected = "field_with_buttons_failing_lt52.html"
     else:
         expected = "field_with_buttons_failing.html"
     assert parse_form(form) == parse_expected(expected)
@@ -617,6 +619,8 @@ def test_file_field():
 
     if django.VERSION < (5, 0):
         expected = "test_clearable_file_field_failing_lt50.html"
+    elif django.VERSION < (5, 2):
+        expected = "test_clearable_file_field_failing_lt52.html"
     else:
         expected = "test_clearable_file_field_failing.html"
     assert parse_form(form) == parse_expected(expected)
@@ -625,6 +629,8 @@ def test_file_field():
 
     if django.VERSION < (5, 0):
         expected = "test_file_field_failing_lt50.html"
+    elif django.VERSION < (5, 2):
+        expected = "test_file_field_failing_lt52.html"
     else:
         expected = "test_file_field_failing.html"
     assert parse_form(form) == parse_expected(expected)
@@ -672,6 +678,8 @@ def test_tabular_formset_layout():
     formset.helper.template = "bootstrap5/table_inline_formset.html"
     if django.VERSION < (5, 0):
         expected = "test_tabular_formset_layout_failing_lt50.html"
+    elif django.VERSION < (5, 2):
+        expected = "test_tabular_formset_layout_failing_lt52.html"
     else:
         expected = "test_tabular_formset_layout_failing.html"
     assert parse_form(formset) == parse_expected(expected)
