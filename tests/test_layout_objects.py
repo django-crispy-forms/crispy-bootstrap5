@@ -246,6 +246,8 @@ class TestBootstrapLayoutObjects:
         form.helper.layout = Layout(InlineRadios("inline_radios"))
         if django.VERSION < (5, 0):
             expected = "inline_radios_failing_lt50.html"
+        elif django.VERSION < (5, 2):
+            expected = "inline_radios_failing_lt52.html"
         else:
             expected = "inline_radios_failing.html"
         assert parse_form(form) == parse_expected(expected)
@@ -256,6 +258,8 @@ class TestBootstrapLayoutObjects:
         form.helper.layout = InlineRadios("checkboxes")
         if django.VERSION < (5, 0):
             expected = "inline_checkboxes_failing_lt50.html"
+        elif django.VERSION < (5, 2):
+            expected = "inline_checkboxes_failing_lt52.html"
         else:
             expected = "inline_checkboxes_failing.html"
         assert parse_form(form) == parse_expected(expected)
