@@ -124,7 +124,7 @@ def test_form_show_errors_non_field_errors():
     if django.VERSION < (5, 2):
         assert html.count("error") == 8
     else:
-        assert html.count("error") == 11
+        assert html.count("error") == 12
 
     # Now we render without errors
     form.helper.form_show_errors = False
@@ -137,7 +137,7 @@ def test_form_show_errors_non_field_errors():
     if django.VERSION < (5, 2):
         assert html.count("error") == 0
     else:
-        assert html.count("error") == 3
+        assert html.count("error") == 4
 
 
 def test_html5_required():

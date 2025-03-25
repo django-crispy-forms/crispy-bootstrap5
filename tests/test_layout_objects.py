@@ -608,7 +608,11 @@ class TestBootstrapLayoutObjects:
         form = GroupedChoiceForm()
         form.helper = FormHelper()
         form.helper.layout = Layout("checkbox_select_multiple")
-        assert parse_form(form) == parse_expected("test_grouped_checkboxes.html")
+        if django.VERSION < (5, 2):
+            expected = "test_grouped_checkboxes_lt52.html"
+        else:
+            expected = "test_grouped_checkboxes.html"
+        assert parse_form(form) == parse_expected(expected)
         form.helper.layout = Layout("radio")
         assert parse_form(form) == parse_expected("test_grouped_radios.html")
 
@@ -617,6 +621,8 @@ class TestBootstrapLayoutObjects:
         form.helper.layout = Layout("checkbox_select_multiple")
         if django.VERSION < (5, 0):
             expected = "test_grouped_checkboxes_failing_lt50.html"
+        elif django.VERSION < (5, 2):
+            expected = "test_grouped_checkboxes_failing_lt52.html"
         else:
             expected = "test_grouped_checkboxes_failing.html"
         assert parse_form(form) == parse_expected(expected)
@@ -624,6 +630,8 @@ class TestBootstrapLayoutObjects:
         form.helper.layout = Layout("radio")
         if django.VERSION < (5, 0):
             expected = "test_grouped_radios_failing_lt50.html"
+        elif django.VERSION < (5, 2):
+            expected = "test_grouped_radios_failing_lt52.html"
         else:
             expected = "test_grouped_radios_failing.html"
         assert parse_form(form) == parse_expected(expected)
