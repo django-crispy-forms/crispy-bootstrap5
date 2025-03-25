@@ -2,7 +2,9 @@
 
 ## Next Release
 * Added Python 3.13 support. 
-* Added support for Django 5.2.
+* Added support for Django 5.2. This required the following template changes:
+  * Added `aria-describedby` to `<fieldset>` elements.
+  * Added a parent `<div>` for errors to allow them to be referenced by `aria-describedby`. This means error messages can now be read by screen reader users.
 
 ## 2024.10 (2024-10-05)
 * Added support for Django 5.1.
