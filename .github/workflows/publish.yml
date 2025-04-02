@@ -36,26 +36,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [tests]
+    environment:
+      name: pypi
+      url: https://pypi.org/p/crispy-bootstrap5
+    permissions:
+      id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.10"
-      - uses: actions/cache@v2
-        name: Configure pip caching
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-publish-pip-${{ hashFiles('**/setup.py') }}
-          restore-keys: |
-            ${{ runner.os }}-publish-pip-
-      - name: Install dependencies
-        run: |
-          pip install build twine
-      - name: Publish
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
-        run: |
-          python -m build
-          twine upload dist/*
+    - name: Publish package distributions to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
