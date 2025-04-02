@@ -1,5 +1,12 @@
 {% if form_show_errors and field.errors %}
+    {% if field.errors.field_id %}
+        {# Django 5.2+ #}
+        <div id="{{field.errors.field_id}}_error" class="invalid-feedback">
+    {% else %}
+        <div id="{{field.auto_id}}_error" class="invalid-feedback">
+    {% endif %}
     {% for error in field.errors %}
-        <span id="error_{{ forloop.counter }}_{{ field.auto_id }}" class="invalid-feedback"><strong>{{ error }}</strong></span>
+        <span id="error_{{ forloop.counter }}_{{ field.auto_id }}"><strong>{{ error }}</strong></span>
     {% endfor %}
+    </div>
 {% endif %}

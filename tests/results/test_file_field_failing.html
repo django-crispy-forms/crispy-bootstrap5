@@ -6,6 +6,7 @@
         </label>
         <div class="is-invalid">
             <input
+                    aria-describedby="id_file_field_error"
                     type="file"
                     name="file_field"
                     class="form-control is-invalid"
@@ -13,9 +14,11 @@
                     required
                     aria-invalid="true"
             >
-            <span id="error_1_id_file_field" class="invalid-feedback">
-                <strong>This field is required.</strong>
-            </span>
+            <div id="id_file_field_error" class="invalid-feedback">
+                <span id="error_1_id_file_field">
+                    <strong>This field is required.</strong>
+                </span>
+            </div>
         </div>
     </div>
 </form>

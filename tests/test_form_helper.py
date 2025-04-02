@@ -1,5 +1,6 @@
 import re
 
+import django
 import pytest
 from crispy_forms.bootstrap import (
     AppendedText,
@@ -120,7 +121,10 @@ def test_form_show_errors_non_field_errors():
     # Ensure those errors were rendered
     assert "<li>Passwords dont match</li>" in html
     assert str(_("This field is required.")) in html
-    assert "error" in html
+    if django.VERSION < (5, 2):
+        assert html.count("error") == 8
+    else:
+        assert html.count("error") == 12
 
     # Now we render without errors
     form.helper.form_show_errors = False
@@ -130,7 +134,10 @@ def test_form_show_errors_non_field_errors():
     # Ensure errors were not rendered
     assert "<li>Passwords dont match</li>" not in html
     assert str(_("This field is required.")) not in html
-    assert "error" not in html
+    if django.VERSION < (5, 2):
+        assert html.count("error") == 0
+    else:
+        assert html.count("error") == 4
 
 
 def test_html5_required():
@@ -487,11 +494,17 @@ def test_bootstrap_form_show_errors_bs5():
 
     form.helper.form_show_errors = True
     html = render_crispy_form(form)
-    assert html.count("error") == 3
+    if django.VERSION < (5, 2):
+        assert html.count("error") == 6
+    else:
+        assert html.count("error") == 9
 
     form.helper.form_show_errors = False
     html = render_crispy_form(form)
-    assert html.count("error") == 0
+    if django.VERSION < (5, 2):
+        assert html.count("error") == 0
+    else:
+        assert html.count("error") == 3
 
 
 def test_error_text_inline():
@@ -506,12 +519,7 @@ def test_error_text_inline():
     form.is_valid()
     html = render_crispy_form(form)
 
-    help_class = "invalid-feedback"
-    help_tag_name = "div"
-
-    matches = re.findall(
-        r'<span id="error_\d_\w*" class="%s"' % help_class, html, re.MULTILINE
-    )
+    matches = re.findall(r'<span id="error_\d_\w*"', html, re.MULTILINE)
     assert len(matches) == 3
 
     form = SampleForm({"email": "invalidemail"})
@@ -520,11 +528,10 @@ def test_error_text_inline():
     form.helper.error_text_inline = False
     html = render_crispy_form(form)
 
-    help_class = "invalid-feedback"
     help_tag_name = "p"
 
     matches = re.findall(
-        r'<{} id="error_\d_\w*" class="{}"'.format(help_tag_name, help_class),
+        r'<{} id="error_\d_\w*"'.format(help_tag_name),
         html,
         re.MULTILINE,
     )
@@ -542,7 +549,7 @@ def test_error_and_help_inline():
 
     # Check that help goes before error, otherwise CSS won't work
     help_position = html.find('<span id="id_email_helptext" class="help-inline">')
-    error_position = html.find('<p id="error_1_id_email" class="invalid-feedback">')
+    error_position = html.find('<p id="error_1_id_email">')
     assert help_position < error_position
 
     # Viceversa
