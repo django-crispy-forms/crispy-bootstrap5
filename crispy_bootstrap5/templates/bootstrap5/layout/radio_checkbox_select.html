@@ -22,12 +22,12 @@
 {% if field.errors and inline_class %}
     {% if field.errors.field_id %}
         {# Django 5.2+ #}
-        <div id="{{field.errors.field_id}}_error">
+        <div id="{{field.errors.field_id}}_error" class="invalid-feedback">
     {% else %}
-        <div id="{{field.auto_id}}_error">
+        <div id="{{field.auto_id}}_error" class="invalid-feedback">
     {% endif %}
         {% for error in field.errors %}
-            <p id="error_{{ forloop.counter }}_{{ field.auto_id }}" class="invalid-feedback"><strong>{{ error }}</strong></p>
+            <p id="error_{{ forloop.counter }}_{{ field.auto_id }}"><strong>{{ error }}</strong></p>
         {% endfor %}
     </div>
 {% endif %}

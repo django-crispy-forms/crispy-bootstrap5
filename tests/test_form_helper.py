@@ -519,12 +519,7 @@ def test_error_text_inline():
     form.is_valid()
     html = render_crispy_form(form)
 
-    help_class = "invalid-feedback"
-    help_tag_name = "div"
-
-    matches = re.findall(
-        r'<span id="error_\d_\w*" class="%s"' % help_class, html, re.MULTILINE
-    )
+    matches = re.findall(r'<span id="error_\d_\w*"', html, re.MULTILINE)
     assert len(matches) == 3
 
     form = SampleForm({"email": "invalidemail"})
@@ -533,11 +528,10 @@ def test_error_text_inline():
     form.helper.error_text_inline = False
     html = render_crispy_form(form)
 
-    help_class = "invalid-feedback"
     help_tag_name = "p"
 
     matches = re.findall(
-        r'<{} id="error_\d_\w*" class="{}"'.format(help_tag_name, help_class),
+        r'<{} id="error_\d_\w*"'.format(help_tag_name),
         html,
         re.MULTILINE,
     )
@@ -555,7 +549,7 @@ def test_error_and_help_inline():
 
     # Check that help goes before error, otherwise CSS won't work
     help_position = html.find('<span id="id_email_helptext" class="help-inline">')
-    error_position = html.find('<p id="error_1_id_email" class="invalid-feedback">')
+    error_position = html.find('<p id="error_1_id_email">')
     assert help_position < error_position
 
     # Viceversa
