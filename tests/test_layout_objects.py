@@ -20,7 +20,7 @@ from crispy_forms.bootstrap import (
     TabHolder,
 )
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Field, Layout, MultiWidgetField
+from crispy_forms.layout import HTML, Field, Layout, MultiField, MultiWidgetField
 from crispy_forms.utils import render_crispy_form
 from django import forms
 from django.template import Context, Template
@@ -541,6 +541,18 @@ class TestBootstrapLayoutObjects:
         assert html.count("<input") == 5
         assert html.count('type="hidden"') == 5
         assert html.count("<label") == 0
+
+    def test_multifield(self):
+        test_form = SampleForm()
+        test_form.helper = FormHelper()
+        test_form.helper.layout = Layout(
+            MultiField("", "password1", "password2")
+        )
+        html = render_crispy_form(test_form)
+        assert test_form["password1"].label in html
+        assert test_form["password2"].label in html
+        assert html.count("<input") == 2
+        assert html.count('type="password"') == 2
 
     def test_multiplecheckboxes(self):
         test_form = CheckboxesSampleForm()
