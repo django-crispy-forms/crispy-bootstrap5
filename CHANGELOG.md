@@ -1,5 +1,8 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
+## Next Release
+* `<legend>` elements now have `fs-6` class so they are the same font size as `<labels>`.  
+
 ## 2025.4 (2025-04-02)
 * Added Python 3.13 support. 
 * Added support for Django 5.2. This required the following template changes:
