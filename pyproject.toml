@@ -38,10 +38,15 @@ dependencies = [
   "django>=4.2",
   "django-crispy-forms>=2.3",
 ]
-[project.optional-dependencies]
+[dependency-groups]
 test = [
   "pytest",
   "pytest-django",
+]
+lint = [
+  "black",
+  "isort",
+  "flake8",
 ]
 [project.urls]
 "CI" = "https://github.com/django-crispy-forms/crispy-bootstrap5/actions"
