@@ -1,12 +1,12 @@
 <form method="post" enctype="multipart/form-data">
     <div id="div_id_clearable_file" class="mb-3">
-        <fieldset aria-describedby="id_clearable_file_error">
-        <legend for="id_clearable_file" class="form-label fs-6 requiredField">
+        <label for="id_clearable_file" class="form-label requiredField">
             Clearable file
             <span class="asteriskField">*</span>
-        </legend>
+        </label>
         <div class="is-invalid">
             <input
+                    aria-describedby="id_clearable_file_error"
                     type="file"
                     name="clearable_file"
                     class="form-control is-invalid"
@@ -20,6 +20,5 @@
                 </span>
             </div>
         </div>
-        </fieldset>
     </div>
 </form>

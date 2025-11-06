@@ -10,7 +10,7 @@ description="Bootstrap5 template pack for django-crispy-forms"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [{name = "David Smith"}]
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 classifiers=[
   "Environment :: Web Environment",
   "Framework :: Django",
@@ -18,15 +18,16 @@ classifiers=[
   "Framework :: Django :: 5.0",
   "Framework :: Django :: 5.1",
   "Framework :: Django :: 5.2",
+  "Framework :: Django :: 6.0",
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Internet :: WWW/HTTP",
   "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
   "Topic :: Software Development :: Libraries :: Python Modules",
