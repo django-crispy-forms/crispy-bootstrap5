@@ -545,14 +545,8 @@ class TestBootstrapLayoutObjects:
     def test_multifield(self):
         test_form = SampleForm()
         test_form.helper = FormHelper()
-        test_form.helper.layout = Layout(
-            MultiField("", "password1", "password2")
-        )
-        html = render_crispy_form(test_form)
-        assert test_form["password1"].label in html
-        assert test_form["password2"].label in html
-        assert html.count("<input") == 2
-        assert html.count('type="password"') == 2
+        test_form.helper.layout = Layout(MultiField("", "password1", "password2"))
+        assert parse_form(test_form) == parse_expected("test_multifield.html")
 
     def test_multiplecheckboxes(self):
         test_form = CheckboxesSampleForm()
