@@ -24,15 +24,12 @@
             {% endif %}
             {{ buttons|safe }}
         </div>
-        {% if field.errors.field_id %}
-            {# Django 5.2+ #}
-            <div id="{{field.errors.field_id}}_error">
-        {% else %}
-            <div id="{{field.auto_id}}_error">
-        {% endif %}
+        {% if field.errors %}
+        <div id="{{field.errors.field_id}}_error">
             {% for error in field.errors %}
                 <p id="error_{{ forloop.counter }}_{{ field.auto_id }}" class="text-danger mb-0"><small><strong>{{ error }}</strong></small></p>
             {% endfor %}
+        {% endif %}
         </div>
         {% include 'bootstrap5/layout/help_text.html' %}
     </div>
