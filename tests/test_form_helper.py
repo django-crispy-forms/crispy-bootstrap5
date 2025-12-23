@@ -121,10 +121,7 @@ def test_form_show_errors_non_field_errors():
     # Ensure those errors were rendered
     assert "<li>Passwords dont match</li>" in html
     assert str(_("This field is required.")) in html
-    if django.VERSION < (5, 2):
-        assert html.count("error") == 8
-    else:
-        assert html.count("error") == 12
+    assert html.count("error") == 12
 
     # Now we render without errors
     form.helper.form_show_errors = False
@@ -134,10 +131,7 @@ def test_form_show_errors_non_field_errors():
     # Ensure errors were not rendered
     assert "<li>Passwords dont match</li>" not in html
     assert str(_("This field is required.")) not in html
-    if django.VERSION < (5, 2):
-        assert html.count("error") == 0
-    else:
-        assert html.count("error") == 4
+    assert html.count("error") == 4
 
 
 def test_html5_required():
@@ -494,17 +488,11 @@ def test_bootstrap_form_show_errors_bs5():
 
     form.helper.form_show_errors = True
     html = render_crispy_form(form)
-    if django.VERSION < (5, 2):
-        assert html.count("error") == 6
-    else:
-        assert html.count("error") == 9
+    assert html.count("error") == 9
 
     form.helper.form_show_errors = False
     html = render_crispy_form(form)
-    if django.VERSION < (5, 2):
-        assert html.count("error") == 0
-    else:
-        assert html.count("error") == 3
+    assert html.count("error") == 3
 
 
 def test_error_text_inline():

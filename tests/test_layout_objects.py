@@ -222,10 +222,7 @@ class TestBootstrapLayoutObjects:
             AppendedText("password1", "#"),
             PrependedText("password2", "$"),
         )
-        if django.VERSION < (5, 0):
-            expected = "test_prepended_appended_text_lt50.html"
-        else:
-            expected = "test_prepended_appended_text.html"
+        expected = "test_prepended_appended_text.html"
         assert parse_form(test_form) == parse_expected(expected)
 
     def test_inline_radios(self):
@@ -244,24 +241,14 @@ class TestBootstrapLayoutObjects:
         form = CheckboxesSampleForm({})
         form.helper = FormHelper()
         form.helper.layout = Layout(InlineRadios("inline_radios"))
-        if django.VERSION < (5, 0):
-            expected = "inline_radios_failing_lt50.html"
-        elif django.VERSION < (5, 2):
-            expected = "inline_radios_failing_lt52.html"
-        else:
-            expected = "inline_radios_failing.html"
+        expected = "inline_radios_failing.html"
         assert parse_form(form) == parse_expected(expected)
 
     def test_inline_checkboxes_failing(self):
         form = CheckboxesSampleForm({})
         form.helper = FormHelper()
         form.helper.layout = InlineRadios("checkboxes")
-        if django.VERSION < (5, 0):
-            expected = "inline_checkboxes_failing_lt50.html"
-        elif django.VERSION < (5, 2):
-            expected = "inline_checkboxes_failing_lt52.html"
-        else:
-            expected = "inline_checkboxes_failing.html"
+        expected = "inline_checkboxes_failing.html"
         assert parse_form(form) == parse_expected(expected)
 
     @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
@@ -602,22 +589,14 @@ class TestBootstrapLayoutObjects:
             FloatingField("text_area"),
             FloatingField("select_input"),
         )
-        if django.VERSION < (5, 0):
-            expected = "test_floating_field_failing_lt50.html"
-        elif django.VERSION < (5, 2):
-            expected = "test_floating_field_failing_lt52.html"
-        else:
-            expected = "test_floating_field_failing.html"
+        expected = "test_floating_field_failing.html"
         assert parse_form(form) == parse_expected(expected)
 
     def test_grouped_checkboxes_radios(self):
         form = GroupedChoiceForm()
         form.helper = FormHelper()
         form.helper.layout = Layout("checkbox_select_multiple")
-        if django.VERSION < (5, 2):
-            expected = "test_grouped_checkboxes_lt52.html"
-        else:
-            expected = "test_grouped_checkboxes.html"
+        expected = "test_grouped_checkboxes.html"
         assert parse_form(form) == parse_expected(expected)
         form.helper.layout = Layout("radio")
         assert parse_form(form) == parse_expected("test_grouped_radios.html")
@@ -625,21 +604,11 @@ class TestBootstrapLayoutObjects:
         form = GroupedChoiceForm({})
         form.helper = FormHelper()
         form.helper.layout = Layout("checkbox_select_multiple")
-        if django.VERSION < (5, 0):
-            expected = "test_grouped_checkboxes_failing_lt50.html"
-        elif django.VERSION < (5, 2):
-            expected = "test_grouped_checkboxes_failing_lt52.html"
-        else:
-            expected = "test_grouped_checkboxes_failing.html"
+        expected = "test_grouped_checkboxes_failing.html"
         assert parse_form(form) == parse_expected(expected)
 
         form.helper.layout = Layout("radio")
-        if django.VERSION < (5, 0):
-            expected = "test_grouped_radios_failing_lt50.html"
-        elif django.VERSION < (5, 2):
-            expected = "test_grouped_radios_failing_lt52.html"
-        else:
-            expected = "test_grouped_radios_failing.html"
+        expected = "test_grouped_radios_failing.html"
         assert parse_form(form) == parse_expected(expected)
 
     def test_switch(self):
@@ -647,10 +616,7 @@ class TestBootstrapLayoutObjects:
         form["is_company"].help_text = "is_company help text"
         form.helper = FormHelper()
         form.helper.layout = Layout(Switch("is_company"))
-        if django.VERSION < (5, 2):
-            expected = "test_switch_lt52.html"
-        else:
-            expected = "test_switch.html"
+        expected = "test_switch.html"
         assert parse_form(form) == parse_expected(expected)
 
     def test_switch_horizontal(self):
@@ -661,10 +627,7 @@ class TestBootstrapLayoutObjects:
         form.helper.field_class = "col-lg-8"
         form.helper.form_class = "form-horizontal"
         form.helper.layout = Layout(Switch("is_company"), "first_name")
-        if django.VERSION < (5, 2):
-            expected = "test_switch_horizontal_lt52.html"
-        else:
-            expected = "test_switch_horizontal.html"
+        expected = "test_switch_horizontal.html"
         assert parse_form(form) == parse_expected(expected)
 
     def test_modal(self):
