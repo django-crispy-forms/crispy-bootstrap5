@@ -323,8 +323,7 @@ def test_bs5_field_with_buttons_css_classes():
             ),
         )
     )
-    expected = "field_with_buttons.html"
-    assert parse_form(form) == parse_expected(expected)
+    assert parse_form(form) == parse_expected("field_with_buttons.html")
 
     form = SampleForm3({})
     form.helper = FormHelper()
@@ -337,8 +336,7 @@ def test_bs5_field_with_buttons_css_classes():
             ),
         )
     )
-    expected = "field_with_buttons_failing.html"
-    assert parse_form(form) == parse_expected(expected)
+    assert parse_form(form) == parse_expected("field_with_buttons_failing.html")
 
 
 def test_field_with_buttons_select():
@@ -551,8 +549,7 @@ def test_bootstrap5_form_inline():
     form.helper.field_template = "bootstrap5/layout/inline_field.html"
     form.helper.layout = Layout("email", "password1", "last_name")
     form.helper.form_class = "row row-cols-lg-auto"
-    expected = "test_bootstrap5_form_inline.html"
-    assert parse_form(form) == parse_expected(expected)
+    assert parse_form(form) == parse_expected("test_bootstrap5_form_inline.html")
 
 
 def test_select():
@@ -611,8 +608,7 @@ def test_file_field():
 
     form.helper.layout = Layout("file_field")
 
-    expected = "test_file_field_failing.html"
-    assert parse_form(form) == parse_expected(expected)
+    assert parse_form(form) == parse_expected("test_file_field_failing.html")
 
 
 def test_row():
@@ -641,8 +637,7 @@ def test_tabular_formset_layout():
     formset = SampleFormSet()
     formset.helper = FormHelper()
     formset.helper.template = "bootstrap5/table_inline_formset.html"
-    expected = "test_tabular_formset_layout.html"
-    assert parse_form(formset) == parse_expected(expected)
+    assert parse_form(formset) == parse_expected("test_tabular_formset_layout.html")
 
     SampleFormSet = formset_factory(SampleForm, extra=3)
     data = {
@@ -652,8 +647,7 @@ def test_tabular_formset_layout():
     formset = SampleFormSet(data)
     formset.helper = FormHelper()
     formset.helper.template = "bootstrap5/table_inline_formset.html"
-    expected = "test_tabular_formset_layout_failing.html"
-    assert parse_form(formset) == parse_expected(expected)
+    assert parse_form(formset) == parse_expected("test_tabular_formset_layout_failing.html")
 
 
 def test_flat_attrs_safe():
@@ -672,5 +666,4 @@ def test_help_text_no_escape():
     form = HelpTextForm()
     form.helper = FormHelper()
     form.helper.form_tag = False
-    expected = "help_text_escape.html"
-    assert parse_form(form) == parse_expected(expected)
+    assert parse_form(form) == parse_expected("help_text_escape.html")
