@@ -222,8 +222,7 @@ class TestBootstrapLayoutObjects:
             AppendedText("password1", "#"),
             PrependedText("password2", "$"),
         )
-        expected = "test_prepended_appended_text.html"
-        assert parse_form(test_form) == parse_expected(expected)
+        assert parse_form(test_form) == parse_expected("test_prepended_appended_text.html")
 
     def test_inline_radios(self):
         form = CheckboxesSampleForm()
@@ -241,15 +240,13 @@ class TestBootstrapLayoutObjects:
         form = CheckboxesSampleForm({})
         form.helper = FormHelper()
         form.helper.layout = Layout(InlineRadios("inline_radios"))
-        expected = "inline_radios_failing.html"
-        assert parse_form(form) == parse_expected(expected)
+        assert parse_form(form) == parse_expected("inline_radios_failing.html")
 
     def test_inline_checkboxes_failing(self):
         form = CheckboxesSampleForm({})
         form.helper = FormHelper()
         form.helper.layout = InlineRadios("checkboxes")
-        expected = "inline_checkboxes_failing.html"
-        assert parse_form(form) == parse_expected(expected)
+        assert parse_form(form) == parse_expected("inline_checkboxes_failing.html")
 
     @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
     def test_accordion_and_accordiongroup(self):
@@ -589,35 +586,30 @@ class TestBootstrapLayoutObjects:
             FloatingField("text_area"),
             FloatingField("select_input"),
         )
-        expected = "test_floating_field_failing.html"
-        assert parse_form(form) == parse_expected(expected)
+        assert parse_form(form) == parse_expected("test_floating_field_failing.html")
 
     def test_grouped_checkboxes_radios(self):
         form = GroupedChoiceForm()
         form.helper = FormHelper()
         form.helper.layout = Layout("checkbox_select_multiple")
-        expected = "test_grouped_checkboxes.html"
-        assert parse_form(form) == parse_expected(expected)
+        assert parse_form(form) == parse_expected("test_grouped_checkboxes.html")
         form.helper.layout = Layout("radio")
         assert parse_form(form) == parse_expected("test_grouped_radios.html")
 
         form = GroupedChoiceForm({})
         form.helper = FormHelper()
         form.helper.layout = Layout("checkbox_select_multiple")
-        expected = "test_grouped_checkboxes_failing.html"
-        assert parse_form(form) == parse_expected(expected)
+        assert parse_form(form) == parse_expected("test_grouped_checkboxes_failing.html")
 
         form.helper.layout = Layout("radio")
-        expected = "test_grouped_radios_failing.html"
-        assert parse_form(form) == parse_expected(expected)
+        assert parse_form(form) == parse_expected("test_grouped_radios_failing.html")
 
     def test_switch(self):
         form = SampleForm()
         form["is_company"].help_text = "is_company help text"
         form.helper = FormHelper()
         form.helper.layout = Layout(Switch("is_company"))
-        expected = "test_switch.html"
-        assert parse_form(form) == parse_expected(expected)
+        assert parse_form(form) == parse_expected("test_switch.html")
 
     def test_switch_horizontal(self):
         form = SampleForm()
@@ -627,8 +619,7 @@ class TestBootstrapLayoutObjects:
         form.helper.field_class = "col-lg-8"
         form.helper.form_class = "form-horizontal"
         form.helper.layout = Layout(Switch("is_company"), "first_name")
-        expected = "test_switch_horizontal.html"
-        assert parse_form(form) == parse_expected(expected)
+        assert parse_form(form) == parse_expected("test_switch_horizontal.html")
 
     def test_modal(self):
         test_form = SampleForm()
