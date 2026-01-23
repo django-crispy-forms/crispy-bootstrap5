@@ -607,10 +607,7 @@ def test_file_field():
     form.helper = FormHelper()
     form.helper.layout = Layout("clearable_file")
 
-    if django.VERSION < (6, 0):
-        assert parse_form(form) == parse_expected("test_clearable_file_field_lt60.html")
-    else:
-        assert parse_form(form) == parse_expected("test_clearable_file_field.html")
+    assert parse_form(form) == parse_expected("test_clearable_file_field.html")
 
     form.helper.layout = Layout("file_field")
 
@@ -624,8 +621,6 @@ def test_file_field():
         expected = "test_clearable_file_field_failing_lt50.html"
     elif django.VERSION < (5, 2):
         expected = "test_clearable_file_field_failing_lt52.html"
-    elif django.VERSION < (6, 0):
-        expected = "test_clearable_file_field_failing_lt60.html"
     else:
         expected = "test_clearable_file_field_failing.html"
     assert parse_form(form) == parse_expected(expected)
