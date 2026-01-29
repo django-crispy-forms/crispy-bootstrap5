@@ -38,6 +38,7 @@ from .forms import (
     InputsForm,
     SampleForm,
     SampleFormCustomWidgets,
+    SelectForm,
 )
 from .utils import parse_expected, parse_form
 
@@ -677,3 +678,19 @@ class TestBootstrapLayoutObjects:
 
         expected_class = 'class="mb-3 row formactions-test-class "'
         assert expected_class in render_crispy_form(test_form)
+
+
+def test_field_margin_override():
+    """
+    Test that we can override the default mb-3 margin on a field wrapper.
+    """
+    test_form = SelectForm()
+    test_form.helper = FormHelper()
+    test_form.helper.layout = Layout(
+        Field('fruit', wrapper_class="mb-0")
+    )
+    expected_class = 'class="mb-0"'
+    html = render_crispy_form(test_form)
+    assert expected_class in html
+    assert "mb-3" not in html
+
