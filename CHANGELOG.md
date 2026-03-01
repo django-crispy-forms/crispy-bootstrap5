@@ -1,6 +1,6 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
-## 2025.11 (TBC)
+## 2026.3 (2026-03-01)
 * Confirmed support for Django 6.0.
 * Dropped support for Django 4.2, 5.0 and 5.1.
 * Added support for Python 3.14.
