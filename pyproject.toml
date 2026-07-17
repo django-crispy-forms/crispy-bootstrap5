@@ -14,6 +14,7 @@ classifiers=[
   "Framework :: Django",
   "Framework :: Django :: 5.2",
   "Framework :: Django :: 6.0",
+  "Framework :: Django :: 6.1",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.10",
@@ -49,7 +50,7 @@ lint = [
 "Issues" = "https://github.com/django-crispy-forms/crispy-bootstrap5/issues"
 
 [tool.setuptools.dynamic]
-version = {attr = "crispy_bootstrap5.__version__"}
+version = { attr = "crispy_bootstrap5.__version__" }
 
 [tool.isort]
 profile = "black"
