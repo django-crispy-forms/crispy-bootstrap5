@@ -9,7 +9,7 @@
             <div class="{% for offset in bootstrap_checkbox_offsets %}{{ offset|slice:"7:14" }}{{ offset|slice:"4:7" }}{{ offset|slice:"14:16" }} {% endfor %}{{ field_class }}">
         {% endif %}
     {% endif %}
-    <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="{% if field|is_checkbox and form_show_labels %}form-check{% else %}mb-3{% if 'form-horizontal' in form_class %} row{% endif %}{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
+    <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="{% if field|is_checkbox and form_show_labels %}form-check{% else %}{% if wrapper_class and ' mb-' in ' '|add:wrapper_class or wrapper_class and ' my-' in ' '|add:wrapper_class or wrapper_class and ' m-' in ' '|add:wrapper_class %}{% else %}mb-3{% endif %}{% if 'form-horizontal' in form_class %} row{% endif %}{% endif %}{% if wrapper_class %}{{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
         {% if field.label and not field|is_checkbox and form_show_labels %}
             {% if field.use_fieldset %}<fieldset{% if 'form-horizontal' in form_class %} class="row"{% endif %}{% if field.aria_describedby %} aria-describedby="{{ field.aria_describedby }}"{% endif %}>{% endif %}
             <{% if field.use_fieldset %}legend{% else %}label{% endif %}
