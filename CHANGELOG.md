@@ -1,6 +1,6 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
-## Next release
+## 2026.9 (2026-09-02)
 * Confirmed support for Django 6.1.
 
 ## 2026.3 (2026-03-01)
