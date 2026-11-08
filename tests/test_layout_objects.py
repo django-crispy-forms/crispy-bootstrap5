@@ -58,6 +58,21 @@ def test_field_with_custom_template():
     assert "<h1>Special custom field</h1>" in html
 
 
+@pytest.mark.parametrize(
+    "layout_object, field_name, expected",
+    [
+        (FloatingField, "first_name", "other_pack floating field: first_name"),
+        (Switch, "is_company", "other_pack switch: is_company"),
+    ],
+)
+def test_layout_object_uses_template_pack(layout_object, field_name, expected):
+    # The template should follow the template pack, as other layout objects do,
+    # so that packs building on bootstrap5 can provide their own template.
+    form = SampleForm()
+    html = layout_object(field_name).render(form, Context(), template_pack="other_pack")
+    assert expected in html
+
+
 def test_multiwidget_field():
     template = Template("""
         {% load crispy_forms_tags %}

@@ -1,5 +1,8 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
+## Next Release
+* `FloatingField` and `Switch` now resolve their templates using the active template pack, like the other layout objects, instead of always using `bootstrap5/`.
+
 ## 2026.9 (2026-09-02)
 * Confirmed support for Django 6.1.
 
