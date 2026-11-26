@@ -3,7 +3,7 @@ from crispy_forms.layout import Field
 
 
 class FloatingField(Field):
-    template = "bootstrap5/layout/floating_field.html"
+    template = "%s/layout/floating_field.html"
 
 
 class BS5Accordion(Accordion):
@@ -30,4 +30,4 @@ class BS5Accordion(Accordion):
 
 
 class Switch(Field):
-    template = "bootstrap5/layout/switch.html"
+    template = "%s/layout/switch.html"
