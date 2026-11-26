@@ -1,6 +1,7 @@
 # CHANGELOG FOR CRISPY-BOOTSTRAP5
 
-## Next Release
+## Next Release (TBC)
+* Added support for Python 3.15.
 * `FloatingField` and `Switch` now resolve their templates using the active template pack, like the other layout objects, instead of always using `bootstrap5/`.
 
 ## 2026.9 (2026-09-02)
